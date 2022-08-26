@@ -62,7 +62,10 @@ Add extra settings in the call to `React.createElement(GraphiQL, {})` in the pub
 
 ```js
 React.createElement(GraphiQL, {
-    fetcher: graphQLFetcher,
+    fetcher: GraphiQL.createFetcher({
+        url: '{{ url(config('graphiql.endpoint')) }}',
+        subscriptionUrl: '{{ config('graphiql.subscription-endpoint') }}',
+    }),
     // See https://github.com/graphql/graphiql/tree/main/packages/graphiql#props for available settings
 })
 ```
@@ -79,7 +82,15 @@ If you use GraphQL through sessions and CSRF, add the following to the `<head>` 
 Modify the GraphQL UI config:
 
 ```diff
-// TODO how?
+React.createElement(GraphiQL, {
+    fetcher: GraphiQL.createFetcher({
+        url: '{{ url(config('graphiql.endpoint')) }}',
+        subscriptionUrl: '{{ config('graphiql.subscription-endpoint') }}',
+    }),
++   headers: {
++       'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
++   },
+})
 ```
 
 Make sure your route includes the `web` middleware group in `config/graphiql.php`:
@@ -91,6 +102,7 @@ Make sure your route includes the `web` middleware group in `config/graphiql.php
 +       'middleware' => ['web']
     ]
 ```
+
 ## Local assets
 
 To serve the assets from your own server, download them with:
