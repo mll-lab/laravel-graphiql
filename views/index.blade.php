@@ -29,28 +29,11 @@
 <div id="graphiql">Loading...</div>
 <script src="{{ \MLL\GraphiQL\DownloadAssetsCommand::jsPath() }}"></script>
 <script>
-    async function graphQLFetcher(graphQLParams, fetcherOpts) {
-        const response = await fetch('{{ url(config('graphiql.endpoint')) }}', {
-            method: 'post',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                ...fetcherOpts.headers,
-            },
-            body: JSON.stringify(graphQLParams),
-            credentials: 'omit',
-        });
-
-        try {
-            return await response.json();
-        } catch {
-            return await response.text();
-        }
-    }
-
     ReactDOM.render(
         React.createElement(GraphiQL, {
-            fetcher: graphQLFetcher,
+            fetcher: GraphiQL.createFetcher({
+                url: '{{ url(config('graphiql.endpoint')) }}',
+            }),
         }),
         document.getElementById('graphiql'),
     );
