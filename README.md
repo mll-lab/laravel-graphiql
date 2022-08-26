@@ -6,10 +6,10 @@ Easily integrate [GraphiQL](https://github.com/graphql/graphiql/tree/main/packag
 [![Packagist](https://img.shields.io/packagist/v/mll-lab/laravel-graphiql.svg)](https://packagist.org/packages/mll-lab/laravel-graphqil)
 [![Packagist](https://img.shields.io/packagist/dt/mll-lab/laravel-graphiql.svg)](https://packagist.org/packages/mll-lab/laravel-graphqil)
 
-[![](https://i.imgur.com/AE5W6OW.png)](https://www.graphqlbin.com/RVIn)
+![Screenshot of GraphiQL with Doc Explorer Open](https://raw.githubusercontent.com/graphql/graphiql/main/packages/graphiql/resources/graphiql.png)
 
-> **Please note**: This is not a GraphQL Server implementation, only a UI for testing and exploring your schema.
-> For the server component we recommend [nuwave/lighthouse](https://github.com/nuwave/lighthouse).
+> **Please note**: This a UI for testing and exploring your schema and does not include a GraphQL server implementation.
+> To host GraphQL from Laravel, we recommend [nuwave/lighthouse](https://github.com/nuwave/lighthouse).
 
 ## Installation
 
