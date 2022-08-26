@@ -10,7 +10,7 @@ class DownloadAssetsCommand extends Command
     public const REACT_PATH_CDN = '//unpkg.com/react@18/umd/react.production.min.js';
 
     public const REACT_DOM_PATH_LOCAL = 'vendor/graphiql/react-dom.production.min.js';
-    public const REACT_DOM_PATH_CDN = '//unpkg.com/react@18/umd/react-dom.production.min.js';
+    public const REACT_DOM_PATH_CDN = '//unpkg.com/react-dom@18/umd/react-dom.production.min.js';
 
     public const JS_PATH_LOCAL = 'vendor/graphiql/graphiql.min.js';
     public const JS_PATH_CDN = '//unpkg.com/graphiql/graphiql.min.js';
