@@ -34,6 +34,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Subscription endpoint
+    |--------------------------------------------------------------------------
+    |
+    | The default subscription endpoint the GraphiQL UI uses to connect to.
+    | Tries to connect to the `endpoint` value if `null` as ws://{{endpoint}}
+    |
+    | Example: `ws://your-endpoint` or `wss://your-endpoint`
+    |
+    */
+
+    'subscription-endpoint' => env('GRAPHQL_PLAYGROUND_SUBSCRIPTION_ENDPOINT', null),
+
+    /*
+    |--------------------------------------------------------------------------
     | Control GraphiQL availability
     |--------------------------------------------------------------------------
     |

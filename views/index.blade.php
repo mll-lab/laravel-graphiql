@@ -33,6 +33,7 @@
         React.createElement(GraphiQL, {
             fetcher: GraphiQL.createFetcher({
                 url: '{{ url(config('graphiql.endpoint')) }}',
+                subscriptionUrl: '{{ config('graphiql.subscription-endpoint') }}',
             }),
         }),
         document.getElementById('graphiql'),
