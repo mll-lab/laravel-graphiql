@@ -9,6 +9,12 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+## v1.0.1
+
+### Fixed
+
+- Change env variable `GRAPHQL_PLAYGROUND_SUBSCRIPTION_ENDPOINT` to `GRAPHIQL_SUBSCRIPTION_ENDPOINT`
+
 ## v1.0.0
 
 ### Added

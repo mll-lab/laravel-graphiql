@@ -44,7 +44,7 @@ return [
     |
     */
 
-    'subscription-endpoint' => env('GRAPHQL_PLAYGROUND_SUBSCRIPTION_ENDPOINT', null),
+    'subscription-endpoint' => env('GRAPHIQL_SUBSCRIPTION_ENDPOINT', null),
 
     /*
     |--------------------------------------------------------------------------
