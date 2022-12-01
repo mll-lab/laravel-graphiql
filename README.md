@@ -87,8 +87,7 @@ React.createElement(GraphiQL, {
         url: '{{ url(config('graphiql.endpoint')) }}',
         subscriptionUrl: '{{ config('graphiql.subscription-endpoint') }}',
     }),
-+   shouldPersistHeaders: true,
-+   headers: JSON.stringify({
++   defaultHeaders: JSON.stringify({
 +       'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
 +   }),
 })
