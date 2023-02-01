@@ -30,6 +30,11 @@
 <script src="{{ \MLL\GraphiQL\DownloadAssetsCommand::jsPath() }}"></script>
 <script src="{{ \MLL\GraphiQL\DownloadAssetsCommand::explorerPluginPath() }}"></script>
 <script>
+    var fetcher = GraphiQL.createFetcher({
+        url: '{{ url(config('graphiql.endpoint')) }}',
+        subscriptionUrl: '{{ config('graphiql.subscription-endpoint') }}',
+    });
+
     function GraphiQLWithExplorer() {
         var [query, setQuery] = React.useState(
             '',
@@ -38,13 +43,10 @@
         var explorerPlugin = GraphiQLPluginExplorer.useExplorerPlugin({
             query: query,
             onEdit: setQuery,
-        })
+        });
 
         return React.createElement(GraphiQL, {
-            fetcher: GraphiQL.createFetcher({
-                url: '{{ url(config('graphiql.endpoint')) }}',
-                subscriptionUrl: '{{ config('graphiql.subscription-endpoint') }}',
-            }),
+            fetcher: fetcher,
             defaultEditorToolsVisibility: true,
             plugins: [explorerPlugin],
             query: query,
