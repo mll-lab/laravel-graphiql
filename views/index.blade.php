@@ -30,11 +30,17 @@
 <script src="{{ \MLL\GraphiQL\DownloadAssetsCommand::jsPath() }}"></script>
 <script src="{{ \MLL\GraphiQL\DownloadAssetsCommand::explorerPluginPath() }}"></script>
 <script>
+    var explorerPlugin = GraphiQLPluginExplorer.useExplorerPlugin({
+        query: query,
+        onEdit: setQuery,
+    });
+
     ReactDOM.render(
         React.createElement(GraphiQL, {
             fetcher: GraphiQL.createFetcher({
                 url: '{{ url(config('graphiql.endpoint')) }}',
                 subscriptionUrl: '{{ config('graphiql.subscription-endpoint') }}',
+                plugins: [explorerPlugin],
                 headerEditorEnabled: true,
                 shouldPersistHeaders: true,
                 defaultHeaders: '{ "Authorization": "Bearer <ENTER YOUR API KEY>" }'
