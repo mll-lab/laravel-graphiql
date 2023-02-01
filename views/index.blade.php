@@ -35,16 +35,18 @@
             '',
         );
 
+        var explorerPlugin = GraphiQLPluginExplorer.useExplorerPlugin({
+            query: query,
+            onEdit: setQuery,
+        })
+
         return React.createElement(GraphiQL, {
             fetcher: GraphiQL.createFetcher({
                 url: '{{ url(config('graphiql.endpoint')) }}',
                 subscriptionUrl: '{{ config('graphiql.subscription-endpoint') }}',
             }),
             defaultEditorToolsVisibility: true,
-            plugins: [GraphiQLPluginExplorer.useExplorerPlugin({
-                query: query,
-                onEdit: setQuery,
-            })],
+            plugins: [explorerPlugin],
             query: query,
             onEditQuery: setQuery,
             headerEditorEnabled: true,
