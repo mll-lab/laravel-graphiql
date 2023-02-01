@@ -15,6 +15,9 @@ class DownloadAssetsCommand extends Command
     public const JS_PATH_LOCAL = 'vendor/graphiql/graphiql.min.js';
     public const JS_PATH_CDN = '//unpkg.com/graphiql/graphiql.min.js';
 
+    public const EXPLORER_PLUGIN_PATH_LOCAL = 'vendor/graphiql/graphiql-plugin-explorer.umd.js';
+    public const EXPLORER_PLUGIN_PATH_CDN = '//unpkg.com/@graphiql/plugin-explorer@0.1.12/dist/graphiql-plugin-explorer.umd.js';
+
     public const CSS_PATH_LOCAL = 'vendor/graphiql/graphiql.min.css';
     public const CSS_PATH_CDN = '//unpkg.com/graphiql/graphiql.min.css';
 
@@ -42,6 +45,10 @@ class DownloadAssetsCommand extends Command
         $this->fileForceContents(
             self::publicPath(self::JS_PATH_LOCAL),
             file_get_contents('https:' . self::JS_PATH_CDN)
+        );
+        $this->fileForceContents(
+            self::publicPath(self::EXPLORER_PLUGIN_PATH_LOCAL),
+            file_get_contents('https:' . self::EXPLORER_PLUGIN_PATH_CDN)
         );
         $this->fileForceContents(
             self::publicPath(self::FAVICON_PATH_LOCAL),
@@ -73,6 +80,11 @@ class DownloadAssetsCommand extends Command
     public static function jsPath(): string
     {
         return self::assetPath(self::JS_PATH_LOCAL, self::JS_PATH_CDN);
+    }
+
+    public static function explorerPluginPath(): string
+    {
+        return self::assetPath(self::EXPLORER_PLUGIN_PATH_LOCAL, self::EXPLORER_PLUGIN_PATH_CDN);
     }
 
     public static function cssPath(): string

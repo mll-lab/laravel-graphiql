@@ -28,12 +28,16 @@
 
 <div id="graphiql">Loading...</div>
 <script src="{{ \MLL\GraphiQL\DownloadAssetsCommand::jsPath() }}"></script>
+<script src="{{ \MLL\GraphiQL\DownloadAssetsCommand::explorerPluginPath() }}"></script>
 <script>
     ReactDOM.render(
         React.createElement(GraphiQL, {
             fetcher: GraphiQL.createFetcher({
                 url: '{{ url(config('graphiql.endpoint')) }}',
                 subscriptionUrl: '{{ config('graphiql.subscription-endpoint') }}',
+                headerEditorEnabled: true,
+                shouldPersistHeaders: true,
+                defaultHeaders: '{ "Authorization": "Bearer <ENTER YOUR API KEY>" }'
             }),
         }),
         document.getElementById('graphiql'),
