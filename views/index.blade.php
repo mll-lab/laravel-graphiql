@@ -30,6 +30,10 @@
 <script src="{{ \MLL\GraphiQL\DownloadAssetsCommand::jsPath() }}"></script>
 <script src="{{ \MLL\GraphiQL\DownloadAssetsCommand::explorerPluginPath() }}"></script>
 <script>
+    var [query, setQuery] = React.useState(
+        '',
+    );
+
     var explorerPlugin = GraphiQLPluginExplorer.useExplorerPlugin({
         query: query,
         onEdit: setQuery,
