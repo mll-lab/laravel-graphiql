@@ -28,14 +28,32 @@
 
 <div id="graphiql">Loading...</div>
 <script src="{{ \MLL\GraphiQL\DownloadAssetsCommand::jsPath() }}"></script>
+<script src="{{ \MLL\GraphiQL\DownloadAssetsCommand::explorerPluginPath() }}"></script>
 <script>
+    const fetcher = GraphiQL.createFetcher({
+        url: '{{ url(config('graphiql.endpoint')) }}',
+        subscriptionUrl: '{{ config('graphiql.subscription-endpoint') }}',
+    });
+
+    function GraphiQLWithExplorer() {
+        const [query, setQuery] = React.useState('');
+
+        return React.createElement(GraphiQL, {
+            fetcher: fetcher,
+            query: query,
+            onEditQuery: setQuery,
+            defaultEditorToolsVisibility: true,
+            plugins: [
+                GraphiQLPluginExplorer.useExplorerPlugin({
+                    query: query,
+                    onEdit: setQuery,
+                })
+            ],
+        });
+    }
+
     ReactDOM.render(
-        React.createElement(GraphiQL, {
-            fetcher: GraphiQL.createFetcher({
-                url: '{{ url(config('graphiql.endpoint')) }}',
-                subscriptionUrl: '{{ config('graphiql.subscription-endpoint') }}',
-            }),
-        }),
+        React.createElement(GraphiQLWithExplorer),
         document.getElementById('graphiql'),
     );
 </script>

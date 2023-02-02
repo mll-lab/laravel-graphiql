@@ -7,13 +7,16 @@ use Illuminate\Console\Command;
 class DownloadAssetsCommand extends Command
 {
     public const REACT_PATH_LOCAL = 'vendor/graphiql/react.production.min.js';
-    public const REACT_PATH_CDN = '//unpkg.com/react@18/umd/react.production.min.js';
+    public const REACT_PATH_CDN = '//unpkg.com/react@17/umd/react.production.min.js';
 
     public const REACT_DOM_PATH_LOCAL = 'vendor/graphiql/react-dom.production.min.js';
-    public const REACT_DOM_PATH_CDN = '//unpkg.com/react-dom@18/umd/react-dom.production.min.js';
+    public const REACT_DOM_PATH_CDN = '//unpkg.com/react-dom@17/umd/react-dom.production.min.js';
 
     public const JS_PATH_LOCAL = 'vendor/graphiql/graphiql.min.js';
     public const JS_PATH_CDN = '//unpkg.com/graphiql/graphiql.min.js';
+
+    public const EXPLORER_PLUGIN_PATH_LOCAL = 'vendor/graphiql/graphiql-plugin-explorer.umd.js';
+    public const EXPLORER_PLUGIN_PATH_CDN = '//unpkg.com/@graphiql/plugin-explorer/dist/graphiql-plugin-explorer.umd.js';
 
     public const CSS_PATH_LOCAL = 'vendor/graphiql/graphiql.min.css';
     public const CSS_PATH_CDN = '//unpkg.com/graphiql/graphiql.min.css';
@@ -42,6 +45,10 @@ class DownloadAssetsCommand extends Command
         $this->fileForceContents(
             self::publicPath(self::JS_PATH_LOCAL),
             file_get_contents('https:' . self::JS_PATH_CDN)
+        );
+        $this->fileForceContents(
+            self::publicPath(self::EXPLORER_PLUGIN_PATH_LOCAL),
+            file_get_contents('https:' . self::EXPLORER_PLUGIN_PATH_CDN)
         );
         $this->fileForceContents(
             self::publicPath(self::FAVICON_PATH_LOCAL),
@@ -73,6 +80,11 @@ class DownloadAssetsCommand extends Command
     public static function jsPath(): string
     {
         return self::assetPath(self::JS_PATH_LOCAL, self::JS_PATH_CDN);
+    }
+
+    public static function explorerPluginPath(): string
+    {
+        return self::assetPath(self::EXPLORER_PLUGIN_PATH_LOCAL, self::EXPLORER_PLUGIN_PATH_CDN);
     }
 
     public static function cssPath(): string
