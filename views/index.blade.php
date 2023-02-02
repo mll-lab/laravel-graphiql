@@ -36,21 +36,19 @@
     });
 
     function GraphiQLWithExplorer() {
-        var [query, setQuery] = React.useState(
-            '',
-        );
-
-        var explorerPlugin = GraphiQLPluginExplorer.useExplorerPlugin({
-            query: query,
-            onEdit: setQuery,
-        });
+        const [query, setQuery] = React.useState('');
 
         return React.createElement(GraphiQL, {
             fetcher: fetcher,
             query: query,
             onEditQuery: setQuery,
             defaultEditorToolsVisibility: true,
-            plugins: [explorerPlugin],
+            plugins: [
+                GraphiQLPluginExplorer.useExplorerPlugin({
+                    query: query,
+                    onEdit: setQuery,
+                })
+            ],
         });
     }
 
