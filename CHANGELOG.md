@@ -9,6 +9,12 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+## v1.1.0
+
+### Added
+
+- Support Laravel 10
+
 ## v1.0.1
 
 ### Fixed
