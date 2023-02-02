@@ -1,48 +1,48 @@
 {
-  "name": "mll-lab/laravel-graphiql",
-  "description": "Easily integrate GraphiQL into your Laravel project",
-  "license": "MIT",
-  "keywords": [
-    "laravel",
-    "graphiql",
-    "graphql"
-  ],
-  "authors": [
-    {
-      "name": "Benedikt Franke",
-      "email": "benedikt@franke.tech"
-    }
-  ],
-  "require": {
-    "php": "^7.1 || ^8",
-    "illuminate/console": "5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6 || ^7 || ^8 || ^9",
-    "illuminate/contracts": "5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6 || ^7 || ^8 || ^9",
-    "illuminate/support": "5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6 || ^7 || ^8 || ^9"
-  },
-  "require-dev": {
-    "ergebnis/composer-normalize": "^2",
-    "laravel/lumen-framework": "5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6 || ^7 || ^8 || ^9",
-    "mll-lab/php-cs-fixer-config": "^4.4"
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "autoload": {
-    "psr-4": {
-      "MLL\\GraphiQL\\": "src/"
-    }
-  },
-  "config": {
-    "allow-plugins": {
-      "kylekatarnls/update-helper": true,
-      "ergebnis/composer-normalize": true
+    "name": "mll-lab/laravel-graphiql",
+    "description": "Easily integrate GraphiQL into your Laravel project",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "graphiql",
+        "graphql"
+    ],
+    "authors": [
+        {
+            "name": "Benedikt Franke",
+            "email": "benedikt@franke.tech"
+        }
+    ],
+    "require": {
+        "php": "^7.1 || ^8",
+        "illuminate/console": "5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6 || ^7 || ^8 || ^9|^10.0",
+        "illuminate/contracts": "5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6 || ^7 || ^8 || ^9|^10.0",
+        "illuminate/support": "5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6 || ^7 || ^8 || ^9|^10.0"
     },
-    "sort-packages": true
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "MLL\\GraphiQL\\GraphiQLServiceProvider"
-      ]
+    "require-dev": {
+        "ergebnis/composer-normalize": "^2",
+        "laravel/lumen-framework": "5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6 || ^7 || ^8 || ^9",
+        "mll-lab/php-cs-fixer-config": "^4.4"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "MLL\\GraphiQL\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true,
+            "ergebnis/composer-normalize": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MLL\\GraphiQL\\GraphiQLServiceProvider"
+            ]
+        }
     }
-  }
 }
