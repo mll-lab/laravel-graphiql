@@ -16,7 +16,7 @@ class DownloadAssetsCommand extends Command
     public const JS_PATH_CDN = '//unpkg.com/graphiql/graphiql.min.js';
 
     public const EXPLORER_PLUGIN_PATH_LOCAL = 'vendor/graphiql/graphiql-plugin-explorer.umd.js';
-    public const EXPLORER_PLUGIN_PATH_CDN = '//unpkg.com/@graphiql/plugin-explorer@0.1.12/dist/graphiql-plugin-explorer.umd.js';
+    public const EXPLORER_PLUGIN_PATH_CDN = '//unpkg.com/@graphiql/plugin-explorer/dist/graphiql-plugin-explorer.umd.js';
 
     public const CSS_PATH_LOCAL = 'vendor/graphiql/graphiql.min.css';
     public const CSS_PATH_CDN = '//unpkg.com/graphiql/graphiql.min.css';
