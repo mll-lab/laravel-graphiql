@@ -47,6 +47,8 @@
 
         return React.createElement(GraphiQL, {
             fetcher: fetcher,
+            query: query,
+            onEditQuery: setQuery,
             defaultEditorToolsVisibility: true,
             plugins: [explorerPlugin],
         });
