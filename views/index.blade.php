@@ -30,7 +30,7 @@
 <script src="{{ \MLL\GraphiQL\DownloadAssetsCommand::explorerPluginPath() }}"></script>
 <script>
     const fetcher = GraphiQL.createFetcher({
-        url: '{{ config('graphiql.endpoint') }}',
+        url: '{{ filter_var($endpoint = config('graphiql.endpoint'), FILTER_VALIDATE_URL) ? url($endpoint) : $endpoint }}',
         subscriptionUrl: '{{ config('graphiql.subscription-endpoint') }}',
     });
 
