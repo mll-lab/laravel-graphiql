@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php echo $graphqlPath; ?>
-
-
 <head>
     <meta charset=utf-8/>
     <meta name="viewport"
@@ -33,7 +30,7 @@
 <script src="{{ \MLL\GraphiQL\DownloadAssetsCommand::explorerPluginPath() }}"></script>
 <script>
     const fetcher = GraphiQL.createFetcher({
-        url: '{{ url(config('graphiql.endpoint')) }}',
+        url: '{{ config('graphiql.endpoint') }}',
         subscriptionUrl: '{{ config('graphiql.subscription-endpoint') }}',
     });
 
