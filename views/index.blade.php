@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php echo $graphqlPath; ?>
+
 
 <head>
     <meta charset=utf-8/>
