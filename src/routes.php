@@ -1,10 +1,23 @@
 <?php declare(strict_types=1);
 
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use MLL\GraphiQL\GraphiQLController;
 
 $config = app(ConfigRepository::class);
 assert($config instanceof ConfigRepository);
+
+/**
+ * Get the schema from the request and append to the configured endpoints.
+ */
+if ($schema = Str::afterLast(trim(Request::capture()->getPathInfo(), '/'), '/')) {
+    $schema = '/' . $schema;
+    if ($config->get('graphiql.route.uri') != $schema) {
+        $config->set('graphiql.route.uri', $config->get('graphiql.route.uri') . $schema);
+        $config->set('graphiql.endpoint', $config->get('graphiql.endpoint') . $schema);
+    }
+}
 
 if ($routeConfig = $config->get('graphiql.route')) {
     /** @var \Illuminate\Contracts\Routing\Registrar|\Laravel\Lumen\Routing\Router $router */
