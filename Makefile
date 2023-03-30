@@ -13,5 +13,8 @@ fix: ## Fix the codestyle
 	composer normalize
 	vendor/bin/php-cs-fixer fix --allow-risky=yes
 
+.PHONY: stan
+	vendor/bin/phpstan
+
 vendor: composer.json composer.lock ## Install dependencies through composer
 	composer update

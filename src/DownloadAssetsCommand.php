@@ -3,6 +3,8 @@
 namespace MLL\GraphiQL;
 
 use Illuminate\Console\Command;
+use Illuminate\Container\Container;
+use Illuminate\Contracts\Routing\UrlGenerator;
 
 class DownloadAssetsCommand extends Command
 {
@@ -106,11 +108,12 @@ class DownloadAssetsCommand extends Command
 
     protected static function asset(string $path): string
     {
-        return app('url')->asset($path);
+        $url = Container::getInstance()->make(UrlGenerator::class);
+        return $url->asset($path);
     }
 
     protected static function publicPath(string $path): string
     {
-        return app()->basePath("public/{$path}");
+        return Container::getInstance()->basePath("public/{$path}");
     }
 }

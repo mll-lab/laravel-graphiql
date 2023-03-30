@@ -1,14 +1,17 @@
 <?php declare(strict_types=1);
 
+use Illuminate\Container\Container;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use MLL\GraphiQL\GraphiQLController;
 
-$config = app(ConfigRepository::class);
+$app = Container::getInstance();
+
+$config = $app->make(ConfigRepository::class);
 assert($config instanceof ConfigRepository);
 
 if ($routeConfig = $config->get('graphiql.route')) {
     /** @var \Illuminate\Contracts\Routing\Registrar|\Laravel\Lumen\Routing\Router $router */
-    $router = app('router');
+    $router = $app->make('router');
 
     $actions = [
         'as' => $routeConfig['name'] ?? 'graphiql',
