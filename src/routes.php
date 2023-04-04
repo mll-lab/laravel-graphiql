@@ -28,7 +28,14 @@ if ($routeConfig = $config->get('graphiql.route')) {
     }
 
     $router->get(
-        $routeConfig['uri'] ?? '/graphiql',
+        $uri = $routeConfig['uri'] ?? '/graphiql',
         $actions
     );
+
+    foreach (array_keys($config->get('graphql.schemas', [])) as $schemaName) {
+        $router->get(
+            "$uri/$schemaName",
+            $actions + ['as' => "graphql.graphiql.$schemaName"]
+        );
+    }
 }
