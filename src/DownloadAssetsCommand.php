@@ -5,6 +5,8 @@ namespace MLL\GraphiQL;
 use Illuminate\Console\Command;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Routing\UrlGenerator;
+use Illuminate\Foundation\Application as LaravelApplication;
+use Laravel\Lumen\Application as LumenApplication;
 
 class DownloadAssetsCommand extends Command
 {
@@ -32,41 +34,31 @@ class DownloadAssetsCommand extends Command
 
     public function handle(): void
     {
-        $this->fileForceContents(
-            self::publicPath(self::REACT_PATH_LOCAL),
-            file_get_contents('https:' . self::REACT_PATH_CDN)
-        );
-        $this->fileForceContents(
-            self::publicPath(self::REACT_DOM_PATH_LOCAL),
-            file_get_contents('https:' . self::REACT_DOM_PATH_CDN)
-        );
-        $this->fileForceContents(
-            self::publicPath(self::CSS_PATH_LOCAL),
-            file_get_contents('https:' . self::CSS_PATH_CDN)
-        );
-        $this->fileForceContents(
-            self::publicPath(self::JS_PATH_LOCAL),
-            file_get_contents('https:' . self::JS_PATH_CDN)
-        );
-        $this->fileForceContents(
-            self::publicPath(self::EXPLORER_PLUGIN_PATH_LOCAL),
-            file_get_contents('https:' . self::EXPLORER_PLUGIN_PATH_CDN)
-        );
-        $this->fileForceContents(
-            self::publicPath(self::FAVICON_PATH_LOCAL),
-            file_get_contents('https:' . self::FAVICON_PATH_CDN)
-        );
+        $this->downloadFileFromCDN(self::REACT_PATH_LOCAL, self::REACT_PATH_CDN);
+        $this->downloadFileFromCDN(self::REACT_DOM_PATH_LOCAL, self::REACT_DOM_PATH_CDN);
+        $this->downloadFileFromCDN(self::CSS_PATH_LOCAL, self::CSS_PATH_CDN);
+        $this->downloadFileFromCDN(self::JS_PATH_LOCAL, self::JS_PATH_CDN);
+        $this->downloadFileFromCDN(self::EXPLORER_PLUGIN_PATH_LOCAL, self::EXPLORER_PLUGIN_PATH_CDN);
+        $this->downloadFileFromCDN(self::FAVICON_PATH_LOCAL, self::FAVICON_PATH_CDN);
     }
 
-    protected function fileForceContents(string $filePath, string $contents): void
+    protected function downloadFileFromCDN(string $localPath, string $cdnPath): void
     {
+        $publicPath = self::publicPath($localPath);
+
         // Ensure the directory exists
-        $directory = dirname($filePath);
+        $directory = dirname($publicPath);
         if (! is_dir($directory)) {
             mkdir($directory, 0777, true);
         }
 
-        file_put_contents($filePath, $contents);
+        $contents = file_get_contents("https:{$cdnPath}");
+        if (false === $contents) {
+            $error = error_get_last();
+            throw new \ErrorException($error['message'] ?? 'An error occurred', 0, $error['type'] ?? 1);
+        }
+
+        file_put_contents($publicPath, $cdnPath);
     }
 
     public static function reactPath(): string
@@ -109,11 +101,15 @@ class DownloadAssetsCommand extends Command
     protected static function asset(string $path): string
     {
         $url = Container::getInstance()->make(UrlGenerator::class);
+
         return $url->asset($path);
     }
 
     protected static function publicPath(string $path): string
     {
-        return Container::getInstance()->basePath("public/{$path}");
+        $container = Container::getInstance();
+        assert($container instanceof LaravelApplication || $container instanceof LumenApplication);
+
+        return $container->basePath("public/{$path}");
     }
 }

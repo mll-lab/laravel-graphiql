@@ -2,9 +2,11 @@
 
 namespace MLL\GraphiQL;
 
+use Illuminate\Contracts\View\View;
+
 class GraphiQLController
 {
-    public function __invoke()
+    public function __invoke(): View
     {
         return view('graphiql::index');
     }

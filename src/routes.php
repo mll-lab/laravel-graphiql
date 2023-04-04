@@ -9,7 +9,8 @@ $app = Container::getInstance();
 $config = $app->make(ConfigRepository::class);
 assert($config instanceof ConfigRepository);
 
-if ($routeConfig = $config->get('graphiql.route')) {
+$routeConfig = $config->get('graphiql.route');
+if (is_array($routeConfig)) {
     /** @var \Illuminate\Contracts\Routing\Registrar|\Laravel\Lumen\Routing\Router $router */
     $router = $app->make('router');
 
