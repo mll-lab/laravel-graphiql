@@ -9,11 +9,17 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
-## v1.2.1
+## v1.2.2
 
 ### Fixed
 
 - Properly handle errors of `file_get_contents()` in `graphiql:download-assets`
+
+## v1.2.1
+
+### Fixed
+
+- Only convert full URLs through `url()` helper https://github.com/mll-lab/laravel-graphiql/pull/9
 
 ## v1.2.0
 
