@@ -11,7 +11,8 @@ class GraphiQLController
 {
     public function __invoke(ConfigRepository $config, Request $request): View
     {
-        $path = "/{$request->path()}";
+        // Handle /, /graphiql or graphiql
+        $path = '/' . trim($request->path(), '/');
 
         $routeConfig = $config->get("graphiql.routes.{$path}");
         if (null === $routeConfig) {
