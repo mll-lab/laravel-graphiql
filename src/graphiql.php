@@ -3,48 +3,50 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Route configuration
+    | Routes configuration
     |--------------------------------------------------------------------------
     |
-    | Set the URI at which the GraphiQL UI can be viewed,
+    | Set the key as URI at which the GraphiQL UI can be viewed,
     | and add any additional configuration for the route.
     |
+    | You can add multiple routes pointing to different GraphQL endpoints.
+    |
     */
+    'routes' => [
+        '/graphiql' => [
+            'name' => 'graphiql',
+            // 'middleware' => ['web']
+            // 'prefix' => '',
+            // 'domain' => 'graphql.' . env('APP_DOMAIN', 'localhost'),
 
-    'route' => [
-        'uri' => '/graphiql',
-        'name' => 'graphiql',
-        // 'middleware' => ['web']
-        // 'prefix' => '',
-        // 'domain' => 'graphql.' . env('APP_DOMAIN', 'localhost'),
+            /*
+            |--------------------------------------------------------------------------
+            | Default GraphQL endpoint
+            |--------------------------------------------------------------------------
+            |
+            | The default endpoint that the GraphiQL UI is set to.
+            | It assumes you are running GraphQL on the same domain
+            | as GraphiQL, but can be set to any URL.
+            |
+            */
+
+            'endpoint' => '/graphql',
+
+            /*
+            |--------------------------------------------------------------------------
+            | Subscription endpoint
+            |--------------------------------------------------------------------------
+            |
+            | The default subscription endpoint the GraphiQL UI uses to connect to.
+            | Tries to connect to the `endpoint` value if `null` as ws://{{endpoint}}
+            |
+            | Example: `ws://your-endpoint` or `wss://your-endpoint`
+            |
+            */
+
+            'subscription-endpoint' => env('GRAPHIQL_SUBSCRIPTION_ENDPOINT', null),
+        ],
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Default GraphQL endpoint
-    |--------------------------------------------------------------------------
-    |
-    | The default endpoint that the GraphiQL UI is set to.
-    | It assumes you are running GraphQL on the same domain
-    | as GraphiQL, but can be set to any URL.
-    |
-    */
-
-    'endpoint' => '/graphql',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Subscription endpoint
-    |--------------------------------------------------------------------------
-    |
-    | The default subscription endpoint the GraphiQL UI uses to connect to.
-    | Tries to connect to the `endpoint` value if `null` as ws://{{endpoint}}
-    |
-    | Example: `ws://your-endpoint` or `wss://your-endpoint`
-    |
-    */
-
-    'subscription-endpoint' => env('GRAPHIQL_SUBSCRIPTION_ENDPOINT', null),
 
     /*
     |--------------------------------------------------------------------------

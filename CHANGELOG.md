@@ -9,6 +9,10 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+### Added
+
+- Introduce multi-route support
+
 ## v1.2.2
 
 ### Fixed

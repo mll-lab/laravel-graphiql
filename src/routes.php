@@ -9,11 +9,13 @@ $app = Container::getInstance();
 $config = $app->make(ConfigRepository::class);
 assert($config instanceof ConfigRepository);
 
-$routeConfig = $config->get('graphiql.route');
-if (is_array($routeConfig)) {
-    /** @var \Illuminate\Contracts\Routing\Registrar|\Laravel\Lumen\Routing\Router $router */
-    $router = $app->make('router');
+/** @var \Illuminate\Contracts\Routing\Registrar|\Laravel\Lumen\Routing\Router $router */
+$router = $app->make('router');
 
+/** @var array<string, array{name?: string, middleware?: string, prefix?: string, domain?: string}> $routesConfig */
+$routesConfig = $config->get('graphiql.routes', []);
+
+foreach ($routesConfig as $routeUri => $routeConfig) {
     $actions = [
         'as' => $routeConfig['name'] ?? 'graphiql',
         'uses' => GraphiQLController::class,
@@ -31,8 +33,5 @@ if (is_array($routeConfig)) {
         $actions['domain'] = $routeConfig['domain'];
     }
 
-    $router->get(
-        $routeConfig['uri'] ?? '/graphiql',
-        $actions
-    );
+    $router->get($routeUri, $actions);
 }

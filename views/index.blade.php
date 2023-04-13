@@ -31,8 +31,8 @@
 <script src="{{ \MLL\GraphiQL\DownloadAssetsCommand::explorerPluginPath() }}"></script>
 <script>
     const fetcher = GraphiQL.createFetcher({
-        url: '{{ filter_var($endpoint = config('graphiql.endpoint'), FILTER_VALIDATE_URL) ? url($endpoint) : $endpoint }}',
-        subscriptionUrl: '{{ config('graphiql.subscription-endpoint') }}',
+        url: '{{ filter_var($endpoint = $routeConfig['endpoint'] ?? null, FILTER_VALIDATE_URL) ? url($endpoint) : $endpoint }}',
+        subscriptionUrl: '{{ $routeConfig['subscription-endpoint'] ?? null }}',
     });
 
     function GraphiQLWithExplorer() {

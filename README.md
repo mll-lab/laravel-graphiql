@@ -63,8 +63,8 @@ Add extra settings in the call to `React.createElement(GraphiQL, {})` in the pub
 ```js
 React.createElement(GraphiQL, {
     fetcher: GraphiQL.createFetcher({
-        url: '{{ url(config('graphiql.endpoint')) }}',
-        subscriptionUrl: '{{ config('graphiql.subscription-endpoint') }}',
+        url: '{{ filter_var($endpoint = $routeConfig['endpoint'] ?? null, FILTER_VALIDATE_URL) ? url($endpoint) : $endpoint }}',
+        subscriptionUrl: '{{ $routeConfig['subscription-endpoint'] ?? null }}',
     }),
     // See https://github.com/graphql/graphiql/tree/main/packages/graphiql#props for available settings
 })
@@ -84,8 +84,8 @@ Modify the GraphQL UI config:
 ```diff
 React.createElement(GraphiQL, {
     fetcher: GraphiQL.createFetcher({
-        url: '{{ url(config('graphiql.endpoint')) }}',
-        subscriptionUrl: '{{ config('graphiql.subscription-endpoint') }}',
+        url: '{{ filter_var($endpoint = $routeConfig['endpoint'] ?? null, FILTER_VALIDATE_URL) ? url($endpoint) : $endpoint }}',
+        subscriptionUrl: '{{ $routeConfig['subscription-endpoint'] ?? null }}',
     }),
 +   defaultHeaders: JSON.stringify({
 +       'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
@@ -97,10 +97,11 @@ Make sure your route includes the `web` middleware group in `config/graphiql.php
 
 ```diff
     'route' => [
-        'uri' => '/graphiql',
-        'name' => 'graphiql',
-+       'middleware' => ['web']
-    ]
+        '/graphiql' => [
+            'name' => 'graphiql',
++           'middleware' => ['web']
+        ],
+    ],
 ```
 
 ## Local assets
