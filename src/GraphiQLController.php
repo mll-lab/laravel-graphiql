@@ -14,7 +14,6 @@ class GraphiQLController
         $path = '/' . $request->path();
 
         $routeConfig = $config->get("graphiql.routes.{$path}");
-
         if (null === $routeConfig) {
             throw new NotFoundHttpException("No graphiql route config found for '{$path}'.");
         }
