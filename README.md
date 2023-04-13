@@ -21,6 +21,10 @@ If you are using Lumen, register the service provider in `bootstrap/app.php`
 $app->register(MLL\GraphiQL\GraphiQLServiceProvider::class);
 ```
 
+## Upgrade Guide
+
+When upgrading between major versions, consider [`UPGRADE.md`](UPGRADE.md).
+
 ## Configuration
 
 By default, the GraphiQL UI is reachable at `/graphiql`
@@ -63,8 +67,8 @@ Add extra settings in the call to `React.createElement(GraphiQL, {})` in the pub
 ```js
 React.createElement(GraphiQL, {
     fetcher: GraphiQL.createFetcher({
-        url: '{{ filter_var($endpoint = $routeConfig['endpoint'] ?? null, FILTER_VALIDATE_URL) ? url($endpoint) : $endpoint }}',
-        subscriptionUrl: '{{ $routeConfig['subscription-endpoint'] ?? null }}',
+        url: '{{ $url }}',
+        subscriptionUrl: '{{ $subscriptionUrl }}',
     }),
     // See https://github.com/graphql/graphiql/tree/main/packages/graphiql#props for available settings
 })
@@ -84,8 +88,8 @@ Modify the GraphQL UI config:
 ```diff
 React.createElement(GraphiQL, {
     fetcher: GraphiQL.createFetcher({
-        url: '{{ filter_var($endpoint = $routeConfig['endpoint'] ?? null, FILTER_VALIDATE_URL) ? url($endpoint) : $endpoint }}',
-        subscriptionUrl: '{{ $routeConfig['subscription-endpoint'] ?? null }}',
+        url: '{{ $url }}',
+        subscriptionUrl: '{{ $subscriptionUrl }}',
     }),
 +   defaultHeaders: JSON.stringify({
 +       'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
@@ -96,7 +100,7 @@ React.createElement(GraphiQL, {
 Make sure your route includes the `web` middleware group in `config/graphiql.php`:
 
 ```diff
-    'route' => [
+    'routes' => [
         '/graphiql' => [
             'name' => 'graphiql',
 +           'middleware' => ['web']

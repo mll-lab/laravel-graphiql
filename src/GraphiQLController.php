@@ -3,12 +3,24 @@
 namespace MLL\GraphiQL;
 
 use Illuminate\Config\Repository as ConfigRepository;
+use Illuminate\Contracts\Routing\UrlGenerator;
+use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GraphiQLController
 {
+    protected UrlGenerator $urlGenerator;
+
+    protected ViewFactory $viewFactory;
+
+    public function __construct(UrlGenerator $urlGenerator, ViewFactory $viewFactory)
+    {
+        $this->urlGenerator = $urlGenerator;
+        $this->viewFactory = $viewFactory;
+    }
+
     public function __invoke(ConfigRepository $config, Request $request): View
     {
         // Handle /, /graphiql or graphiql
@@ -18,7 +30,18 @@ class GraphiQLController
         if (null === $routeConfig) {
             throw new NotFoundHttpException("No graphiql route config found for '{$path}'.");
         }
+        assert(is_array($routeConfig));
 
-        return view('graphiql::index', ['routeConfig' => $routeConfig]);
+        return $this->viewFactory->make('graphiql::index', [
+            'endpoint' => $this->maybeURL($routeConfig['endpoint'] ?? null),
+            'subscription-endpoint' => $this->maybeURL($routeConfig['subscription-endpoint'] ?? null),
+        ]);
+    }
+
+    protected function maybeURL(?string $endpoint): ?string
+    {
+        return is_string($endpoint) && filter_var($endpoint, FILTER_VALIDATE_URL)
+            ? $this->urlGenerator->to($endpoint)
+            : $endpoint;
     }
 }
