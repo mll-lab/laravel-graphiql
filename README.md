@@ -66,12 +66,12 @@ Add extra settings in the call to `React.createElement(GraphiQL, {})` in the pub
 
 ```js
 React.createElement(GraphiQL, {
-    fetcher: GraphiQL.createFetcher({
-        url: '{{ $url }}',
-        subscriptionUrl: '{{ $subscriptionUrl }}',
-    }),
-    // See https://github.com/graphql/graphiql/tree/main/packages/graphiql#props for available settings
-})
+  fetcher: GraphiQL.createFetcher({
+    url: "{{ $url }}",
+    subscriptionUrl: "{{ $subscriptionUrl }}",
+  }),
+  // See https://github.com/graphql/graphiql/tree/main/packages/graphiql#props for available settings
+});
 ```
 
 ### Configure session authentication
