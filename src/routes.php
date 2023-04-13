@@ -16,10 +16,11 @@ $router = $app->make('router');
 $routesConfig = $config->get('graphiql.routes', []);
 
 foreach ($routesConfig as $routeUri => $routeConfig) {
-    $actions = [
-        'as' => $routeConfig['name'] ?? 'graphiql',
-        'uses' => GraphiQLController::class,
-    ];
+    $actions = ['uses' => GraphiQLController::class];
+
+    if (isset($routeConfig['name'])) {
+        $actions['as'] = $routeConfig['name'];
+    }
 
     if (isset($routeConfig['middleware'])) {
         $actions['middleware'] = $routeConfig['middleware'];
