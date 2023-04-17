@@ -9,6 +9,10 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+Fixed an issue where scrolling would become impossible if content was larger than the screens height.
+Adjusted the styling of the eplorer tabs title.
+Added some margin to the select element within the explorers actions
+
 ## v2.0.0
 
 ### Added
