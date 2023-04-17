@@ -17,6 +17,33 @@
         #graphiql {
             height: 100vh;
         }
+
+        /* Make the explorer feel more integrated */
+        .docExplorerWrap {
+            overflow: auto !important;
+            width: 100% !important;
+            height: auto !important;
+        }
+
+        .doc-explorer-title-bar {
+            font-weight: var(--font-weight-medium);
+            font-size: var(--font-size-h2);
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .doc-explorer-rhs {
+            display: none;
+        }
+
+        .doc-explorer-contents {
+            margin: var(--px-16) 0 0;
+        }
+
+        .graphiql-explorer-actions select {
+            margin-left: var(--px-12);
+        }
     </style>
     <script src="{{ \MLL\GraphiQL\DownloadAssetsCommand::reactPath() }}"></script>
     <script src="{{ \MLL\GraphiQL\DownloadAssetsCommand::reactDOMPath() }}"></script>
