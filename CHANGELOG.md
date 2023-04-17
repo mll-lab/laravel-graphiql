@@ -9,14 +9,16 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+## v2.0.1
+
 ### Fixed
 
-- Allow scrolling in GraphiQL explorer plugin
+- Allow scrolling in GraphiQL Explorer plugin
 
 ### Changed
 
-- Adjusted styling of the GraphiQL eplorer tab title
-- Added some margin to the select element within the GraphiQL explorer actions
+- Adjusted styling of the GraphiQL Explorer tab title
+- Added some margin to the select element within the GraphiQL Explorer actions
 
 ## v2.0.0
 
