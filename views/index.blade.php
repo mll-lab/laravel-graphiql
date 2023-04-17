@@ -24,7 +24,6 @@
             width: 100% !important;
             height: auto !important;
         }
-
         .doc-explorer-title-bar {
             font-weight: var(--font-weight-medium);
             font-size: var(--font-size-h2);
@@ -32,15 +31,12 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-
         .doc-explorer-rhs {
             display: none;
         }
-
         .doc-explorer-contents {
             margin: var(--px-16) 0 0;
         }
-
         .graphiql-explorer-actions select {
             margin-left: var(--px-12);
         }
