@@ -9,6 +9,12 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+## v2.0.2
+
+### Fixed
+
+- Fix `graphiql:download-assets` command
+
 ## v2.0.1
 
 ### Fixed
