@@ -58,7 +58,7 @@ class DownloadAssetsCommand extends Command
             throw new \ErrorException($error['message'] ?? 'An error occurred', 0, $error['type'] ?? 1);
         }
 
-        file_put_contents($publicPath, $cdnPath);
+        file_put_contents($publicPath, $contents);
     }
 
     public static function reactPath(): string
