@@ -11,9 +11,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GraphiQLController
 {
-    protected UrlGenerator $urlGenerator;
+    /** @var \Illuminate\Contracts\Routing\UrlGenerator */
+    protected $urlGenerator;
 
-    protected ViewFactory $viewFactory;
+    /** @var \Illuminate\Contracts\View\Factory $ */
+    protected $viewFactory;
 
     public function __construct(UrlGenerator $urlGenerator, ViewFactory $viewFactory)
     {

@@ -9,6 +9,12 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+## v2.0.3
+
+### Fixed
+
+- Fix PHP 7.1 compatibility
+
 ## v2.0.2
 
 ### Fixed
