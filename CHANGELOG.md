@@ -9,6 +9,13 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+## v3.0.0
+
+### Removed
+
+- Drop support for Laravel versions older than 9
+- Drop support for PHP versions older than 8
+
 ## v2.0.3
 
 ### Fixed
