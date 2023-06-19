@@ -53,7 +53,7 @@ class DownloadAssetsCommand extends Command
         }
 
         $contents = file_get_contents("https:{$cdnPath}");
-        if (false === $contents) {
+        if ($contents === false) {
             $error = error_get_last();
             throw new \ErrorException($error['message'] ?? 'An error occurred', 0, $error['type'] ?? 1);
         }

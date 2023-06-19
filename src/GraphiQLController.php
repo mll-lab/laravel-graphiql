@@ -3,7 +3,6 @@
 namespace MLL\GraphiQL;
 
 use Illuminate\Config\Repository as ConfigRepository;
-use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -12,7 +11,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class GraphiQLController
 {
     public function __construct(
-        protected UrlGenerator $urlGenerator,
         protected ViewFactory $viewFactory,
     ) {}
 
@@ -34,7 +32,7 @@ class GraphiQLController
     protected function maybeURL(?string $endpoint): ?string
     {
         return is_string($endpoint) && filter_var($endpoint, FILTER_VALIDATE_URL)
-            ? $this->urlGenerator->to($endpoint)
+            ? url($endpoint) // Avoid injecting UrlGenerator for Lumen compatibility
             : $endpoint;
     }
 }
