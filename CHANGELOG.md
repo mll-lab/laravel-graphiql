@@ -9,6 +9,12 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+## v3.0.1
+
+### Fixed
+
+- Fix Lumen compatibility
+
 ## v3.0.0
 
 ### Removed
