@@ -3,4 +3,5 @@ parameters:
   paths:
   - src
   - views
+  - .php-cs-fixer.php
   checkOctaneCompatibility: true

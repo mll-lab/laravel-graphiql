@@ -9,6 +9,12 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+## v3.0.2
+
+### Fixed
+
+- Pin working version `0.1.20` of `@graphiql/plugin-explorer`
+
 ## v3.0.1
 
 ### Fixed
