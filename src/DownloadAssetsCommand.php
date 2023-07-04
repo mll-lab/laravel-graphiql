@@ -21,7 +21,7 @@ class DownloadAssetsCommand extends Command
 
     public const PLUGIN_EXPLORER_PATH_LOCAL = 'vendor/graphiql/graphiql-plugin-explorer.umd.js';
     /** Pinned because the latest version broke, see https://github.com/mll-lab/laravel-graphiql/issues/25. */
-    public const PLUGIN_EXPLORER_PATH_CDN = '//unpkg.com/@graphiql/plugin-explorer@0.1.20/dist/graphiql-plugin-explorer.umd.js';
+    public const PLUGIN_EXPLORER_PATH_CDN = '//unpkg.com/@graphiql/plugin-explorer@0.2.0/dist/index.umd.js';
 
     public const CSS_PATH_LOCAL = 'vendor/graphiql/graphiql.min.css';
     public const CSS_PATH_CDN = '//unpkg.com/graphiql/graphiql.min.css';
