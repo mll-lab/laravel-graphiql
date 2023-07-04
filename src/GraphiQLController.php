@@ -12,8 +12,7 @@ class GraphiQLController
 {
     public function __construct(
         protected ViewFactory $viewFactory,
-    ) {
-    }
+    ) {}
 
     public function __invoke(ConfigRepository $config, Request $request): View
     {
