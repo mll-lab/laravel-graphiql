@@ -5,3 +5,6 @@ parameters:
   - views
   - .php-cs-fixer.php
   checkOctaneCompatibility: true
+  # Install https://plugins.jetbrains.com/plugin/7677-awesome-console to make those links clickable
+  editorUrl: '%%relFile%%:%%line%%'
+  editorUrlTitle: '%%relFile%%:%%line%%'
