@@ -65,13 +65,32 @@ You can use that for all kinds of customization.
 Add extra settings in the call to `React.createElement(GraphiQL, {})` in the published view:
 
 ```js
-React.createElement(GraphiQL, {
-  fetcher: GraphiQL.createFetcher({
-    url: "{{ $url }}",
-    subscriptionUrl: "{{ $subscriptionUrl }}",
-  }),
-  // See https://github.com/graphql/graphiql/tree/main/packages/graphiql#props for available settings
-});
+function GraphiQLWithExplorer() {
+    const [query, setQuery] = React.useState('');
+    const fetcher = GraphiQL.createFetcher({
+        url: '{{ $url }}',
+        subscriptionUrl: '{{ $subscriptionUrl }}',
+    })
+
+    return React.createElement(GraphiQL, {
+        fetcher,
+        query,
+        onEditQuery: setQuery,
+        defaultEditorToolsVisibility: true,
+        plugins: [
+            GraphiQLPluginExplorer.useExplorerPlugin({
+                query,
+                onEdit: setQuery,
+            }),
+        ],
+        // See https://github.com/graphql/graphiql/tree/main/packages/graphiql#props for available settings
+    });
+}
+
+ReactDOM.render(
+    React.createElement(GraphiQLWithExplorer),
+    document.getElementById('graphiql'),
+);
 ```
 
 ### Configure session authentication
@@ -86,14 +105,12 @@ If you use GraphQL through sessions and CSRF, add the following to the `<head>` 
 Modify the GraphQL UI config:
 
 ```diff
-React.createElement(GraphiQL, {
-    fetcher: GraphiQL.createFetcher({
-        url: '{{ $url }}',
-        subscriptionUrl: '{{ $subscriptionUrl }}',
-    }),
-+   defaultHeaders: JSON.stringify({
-+       'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-+   }),
+const fetcher = GraphiQL.createFetcher({
+    url: '{{ $url }}',
+    subscriptionUrl: '{{ $subscriptionUrl }}',
++    headers: {
++        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
++    },
 })
 ```
 
