@@ -76,6 +76,7 @@
                     onEdit: setQuery,
                 }),
             ],
+            // See https://github.com/graphql/graphiql/tree/main/packages/graphiql#props for available settings
         });
     }
 

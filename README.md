@@ -62,14 +62,11 @@ You can use that for all kinds of customization.
 
 ### Change settings of the GraphiQL UI instance
 
-Add extra settings in the call to `React.createElement(GraphiQL, {})` in the published view:
+Add extra props in the call to `React.createElement(GraphiQL, ...)` in the published view.
 
 ```js
 React.createElement(GraphiQL, {
-  fetcher: GraphiQL.createFetcher({
-    url: "{{ $url }}",
-    subscriptionUrl: "{{ $subscriptionUrl }}",
-  }),
+  ...,
   // See https://github.com/graphql/graphiql/tree/main/packages/graphiql#props for available settings
 });
 ```
@@ -83,14 +80,11 @@ If you use GraphQL through sessions and CSRF, add the following to the `<head>` 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 ```
 
-Modify the GraphQL UI config:
+Modify the GraphiQL props as follows:
 
 ```diff
 React.createElement(GraphiQL, {
-    fetcher: GraphiQL.createFetcher({
-        url: '{{ $url }}',
-        subscriptionUrl: '{{ $subscriptionUrl }}',
-    }),
+    ...,
 +   defaultHeaders: JSON.stringify({
 +       'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
 +   }),
