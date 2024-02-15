@@ -1,6 +1,6 @@
 # Laravel GraphiQL
 
-Easily integrate [GraphiQL](https://github.com/graphql/graphiql/tree/main/packages/graphiql) into your Laravel projects.
+A thin wrapper for serving [the GraphiQL UI](https://github.com/graphql/graphiql/tree/main/packages/graphiql) from Laravel
 
 [![GitHub license](https://img.shields.io/github/license/mll-lab/laravel-graphiql.svg)](https://github.com/mll-lab/laravel-graphqil/blob/master/LICENSE)
 [![Packagist](https://img.shields.io/packagist/v/mll-lab/laravel-graphiql.svg)](https://packagist.org/packages/mll-lab/laravel-graphqil)
@@ -9,11 +9,16 @@ Easily integrate [GraphiQL](https://github.com/graphql/graphiql/tree/main/packag
 ![Screenshot of GraphiQL with Doc Explorer Open](https://raw.githubusercontent.com/graphql/graphiql/main/packages/graphiql/resources/graphiql.png)
 
 > **Please note**: This a UI for testing and exploring your schema and does not include a GraphQL server implementation.
-> To host GraphQL from Laravel, we recommend [nuwave/lighthouse](https://github.com/nuwave/lighthouse).
+> To serve a GraphQL API from Laravel, we recommend [nuwave/lighthouse](https://github.com/nuwave/lighthouse).
 
 ## Installation
 
+Install the package via [composer](https://getcomposer.org):
+
     composer require mll-lab/laravel-graphiql
+
+Due to [Laravel package discovery](https://laravel.com/docs/packages#package-discovery),
+this package will automatically register and is ready to use without configuration.
 
 If you are using Lumen, register the service provider in `bootstrap/app.php`
 
