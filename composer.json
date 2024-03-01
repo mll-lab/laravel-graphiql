@@ -15,7 +15,7 @@
   ],
   "require": {
     "php": "^8",
-    "illuminate/console": "^11",
+    "illuminate/console": "^9 || ^10 || ^11",
     "illuminate/contracts": "^9 || ^10 || ^11",
     "illuminate/support": "^9 || ^10 || ^11"
   },
