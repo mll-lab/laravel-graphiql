@@ -9,6 +9,12 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+## v3.2.0
+
+### Added
+
+- Support Laravel 11
+
 ## v3.1.0
 
 ### Changed
