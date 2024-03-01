@@ -1,4 +1,5 @@
-name: "Validate"
+name: Validate
+
 on:
   pull_request:
   push:
@@ -20,6 +21,7 @@ jobs:
         laravel-version:
           - "^9"
           - "^10"
+          - "^11"
         composer:
           - name: lowest
             arg: "--prefer-lowest --prefer-stable"
@@ -28,21 +30,19 @@ jobs:
         exclude:
           - php-version: "8.0"
             laravel-version: "^10"
+          - php-version: "8.0"
+            laravel-version: "^11"
+          - php-version: "8.1"
+            laravel-version: "^11"
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: shivammathur/setup-php@v2
         with:
           coverage: none
           extensions: ${{ env.REQUIRED_PHP_EXTENSIONS }}
           php-version: ${{ matrix.php-version }}
-
-      - name: "Cache composer dependencies"
-        uses: actions/cache@v3
-        with:
-          path: ~/.composer/cache
-          key: php-${{ matrix.php-version }}-composer-${{ matrix.laravel-version }}-os-${{ matrix.os }}-composer-${{ matrix.composer.name }}
 
       - run: >
           composer require
