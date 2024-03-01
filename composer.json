@@ -15,16 +15,15 @@
   ],
   "require": {
     "php": "^8",
-    "illuminate/console": "^9 || ^10",
-    "illuminate/contracts": "^9 || ^10",
-    "illuminate/support": "^9 || ^10"
+    "illuminate/console": "^9 || ^10 || ^11",
+    "illuminate/contracts": "^9 || ^10 || ^11",
+    "illuminate/support": "^9 || ^10 || ^11"
   },
   "require-dev": {
     "ergebnis/composer-normalize": "^2.29",
-    "laravel/lumen-framework": "^9 || ^10",
+    "larastan/larastan": "^2.5.2",
     "mll-lab/php-cs-fixer-config": "^5",
-    "nunomaduro/larastan": "^2.5.2",
-    "orchestra/testbench": "^7.7 || ^8.8",
+    "orchestra/testbench": "^7.7 || ^8.8 || ^9",
     "phpstan/extension-installer": "^1",
     "phpstan/phpstan": "^1.10.15",
     "phpstan/phpstan-mockery": "^1.1.1",
