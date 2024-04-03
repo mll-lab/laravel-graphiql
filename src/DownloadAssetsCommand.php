@@ -27,7 +27,7 @@ class DownloadAssetsCommand extends Command
     public const CSS_PATH_CDN = '//unpkg.com/graphiql/graphiql.min.css';
 
     public const FAVICON_PATH_LOCAL = 'vendor/graphiql/favicon.ico';
-    public const FAVICON_PATH_CDN = '//raw.githubusercontent.com/graphql/graphql.github.io/source/static/favicon.ico';
+    public const FAVICON_PATH_CDN = '//raw.githubusercontent.com/graphql/graphql.github.io/source/public/favicon.ico';
 
     protected $signature = 'graphiql:download-assets';
 
