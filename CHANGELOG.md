@@ -9,6 +9,12 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+## v3.2.1
+
+### Fixed
+
+- Fix `favicon.ico` download link
+
 ## v3.2.0
 
 ### Added
