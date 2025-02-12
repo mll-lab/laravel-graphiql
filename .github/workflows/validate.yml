@@ -18,10 +18,13 @@ jobs:
           - "8.0"
           - "8.1"
           - "8.2"
+          - "8.3"
+          - "8.4"
         laravel-version:
           - "^9"
           - "^10"
           - "^11"
+          - "^12"
         composer:
           - name: lowest
             arg: "--prefer-lowest --prefer-stable"
@@ -34,6 +37,10 @@ jobs:
             laravel-version: "^11"
           - php-version: "8.1"
             laravel-version: "^11"
+          - php-version: "8.0"
+            laravel-version: "^12"
+          - php-version: "8.1"
+            laravel-version: "^12"
 
     steps:
       - uses: actions/checkout@v4
