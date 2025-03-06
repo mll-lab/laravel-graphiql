@@ -24,8 +24,8 @@ class GraphiQLController
         assert(is_array($routeConfig));
 
         return $this->viewFactory->make('graphiql::index', [
-            'url' => $this->maybeURL($routeConfig['endpoint'] ?? null),
-            'subscriptionUrl' => $this->maybeURL($routeConfig['subscription-endpoint'] ?? null),
+            'url' => $this->maybeURL($routeConfig['endpoint'] ?? null), // @phpstan-ignore argument.type (mixed)
+            'subscriptionUrl' => $this->maybeURL($routeConfig['subscription-endpoint'] ?? null), // @phpstan-ignore argument.type (mixed)
         ]);
     }
 
