@@ -7,7 +7,7 @@ use MLL\GraphiQL\GraphiQLController;
 $app = Container::getInstance();
 
 $config = $app->make(ConfigRepository::class);
-assert($config instanceof ConfigRepository);
+assert($config instanceof ConfigRepository); // @phpstan-ignore instanceof.alwaysTrue (aids IDE)
 
 /** @var \Illuminate\Contracts\Routing\Registrar|\Laravel\Lumen\Routing\Router $router */
 $router = $app->make('router');

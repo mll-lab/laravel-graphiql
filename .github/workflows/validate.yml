@@ -18,10 +18,13 @@ jobs:
           - "8.0"
           - "8.1"
           - "8.2"
+          - "8.3"
+          - "8.4"
         laravel-version:
           - "^9"
           - "^10"
           - "^11"
+          - "^12"
         composer:
           - name: lowest
             arg: "--prefer-lowest --prefer-stable"
@@ -32,8 +35,18 @@ jobs:
             laravel-version: "^10"
           - php-version: "8.0"
             laravel-version: "^11"
+          - php-version: "8.0"
+            laravel-version: "^12"
           - php-version: "8.1"
             laravel-version: "^11"
+          - php-version: "8.1"
+            laravel-version: "^12"
+          - php-version: "8.3"
+            laravel-version: "^9"
+          - php-version: "8.4"
+            laravel-version: "^9"
+          - php-version: "8.4"
+            laravel-version: "^10"
 
     steps:
       - uses: actions/checkout@v4
@@ -53,4 +66,4 @@ jobs:
           --update-with-all-dependencies
           ${{ matrix.composer.arg }}
 
-      - run: vendor/bin/phpstan
+      - run: vendor/bin/phpstan analyse  --configuration=phpstan.neon

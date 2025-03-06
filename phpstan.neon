@@ -10,5 +10,11 @@ parameters:
   editorUrlTitle: '%%relFile%%:%%line%%'
   ignoreErrors:
   # Lumen does not support Laravel 11
-  - '#Laravel\\Lumen#'
-
+  - message: '#Laravel\\Lumen#'
+  # Allows assert() calls to assist IDE autocompletion
+  - message: '#Call to function assert\(\) with true will always evaluate to true\.#'
+    reportUnmatched: false
+  # This file actually is a config file
+  - message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'.#"
+    reportUnmatched: false
+    path: src/graphiql.php
