@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace MLL\GraphiQL;
 
@@ -116,6 +118,9 @@ class DownloadAssetsCommand extends Command
 
     public static function cdnURL(string $path): string
     {
-        return str_replace('//', '/', $path);
+        if (strpos($path, '//') === 0) {
+            return 'https:' . $path;
+        }
+        return $path;
     }
 }
