@@ -11,20 +11,20 @@ use Laravel\Lumen\Application as LumenApplication;
 class DownloadAssetsCommand extends Command
 {
     public const REACT_PATH_LOCAL = 'vendor/graphiql/react.production.min.js';
-    public const REACT_PATH_CDN = '//unpkg.com/react@17/umd/react.production.min.js';
+    public const REACT_PATH_CDN = '//cdn.jsdelivr.net/npm/react@17/umd/react.production.min.js';
 
     public const REACT_DOM_PATH_LOCAL = 'vendor/graphiql/react-dom.production.min.js';
-    public const REACT_DOM_PATH_CDN = '//unpkg.com/react-dom@17/umd/react-dom.production.min.js';
+    public const REACT_DOM_PATH_CDN = '//cdn.jsdelivr.net/npm/react-dom@17/umd/react-dom.production.min.js';
 
     public const JS_PATH_LOCAL = 'vendor/graphiql/graphiql.min.js';
-    public const JS_PATH_CDN = '//unpkg.com/graphiql/graphiql.min.js';
+    public const JS_PATH_CDN = '//cdn.jsdelivr.net/npm/graphiql/graphiql.min.js';
 
     public const PLUGIN_EXPLORER_PATH_LOCAL = 'vendor/graphiql/graphiql-plugin-explorer.umd.js';
     /** Pinned because the latest version broke, see https://github.com/mll-lab/laravel-graphiql/issues/25. */
-    public const PLUGIN_EXPLORER_PATH_CDN = '//unpkg.com/@graphiql/plugin-explorer@0.2.0/dist/index.umd.js';
+    public const PLUGIN_EXPLORER_PATH_CDN = '//cdn.jsdelivr.net/npm/@graphiql/plugin-explorer@0.2.0/dist/index.umd.js';
 
     public const CSS_PATH_LOCAL = 'vendor/graphiql/graphiql.min.css';
-    public const CSS_PATH_CDN = '//unpkg.com/graphiql/graphiql.min.css';
+    public const CSS_PATH_CDN = '//cdn.jsdelivr.net/npm/graphiql/graphiql.min.css';
 
     public const FAVICON_PATH_LOCAL = 'vendor/graphiql/favicon.ico';
     public const FAVICON_PATH_CDN = '//raw.githubusercontent.com/graphql/graphql.github.io/source/public/favicon.ico';
