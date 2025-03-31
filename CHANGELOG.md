@@ -9,6 +9,12 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+## v3.3.1
+
+### Fixed
+
+- Migrate CDN URLs from unpkg to jsDelivr
+
 ## v3.3.0
 
 ### Added
