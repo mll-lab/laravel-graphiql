@@ -10,22 +10,38 @@ final class DownloadAssetsCommandTest extends TestCase
     {
         parent::setUp();
 
-        $reactPublicPath = DownloadAssetsCommand::publicPath(DownloadAssetsCommand::REACT_PATH_LOCAL);
-        if (file_exists($reactPublicPath)) {
-            unlink($reactPublicPath);
+        foreach (self::paths() as [$localPath, $cdnPath]) {
+            $publicPath = DownloadAssetsCommand::publicPath($localPath);
+            if (file_exists($publicPath)) {
+                unlink($publicPath);
+            }
         }
     }
 
     public function testSuccessfulDownload(): void
     {
-        $reactPublicPath = DownloadAssetsCommand::publicPath(DownloadAssetsCommand::REACT_PATH_LOCAL);
-        $this->assertFileDoesNotExist($reactPublicPath);
-        $this->assertSame(DownloadAssetsCommand::REACT_PATH_CDN, DownloadAssetsCommand::reactPath());
+        foreach (self::paths() as [$localPath, $cdnPath]) {
+            $this->assertFileDoesNotExist(DownloadAssetsCommand::publicPath($localPath));
+            $this->assertSame(DownloadAssetsCommand::cdnURL($cdnPath), DownloadAssetsCommand::availablePath($localPath, $cdnPath));
+        }
 
         $this->artisan('graphiql:download-assets')
             ->assertOk();
 
-        $this->assertFileExists($reactPublicPath);
-        $this->assertSame(DownloadAssetsCommand::asset(DownloadAssetsCommand::REACT_PATH_LOCAL), DownloadAssetsCommand::reactPath());
+        foreach (self::paths() as [$localPath, $cdnPath]) {
+            $this->assertFileExists(DownloadAssetsCommand::publicPath($localPath));
+            $this->assertSame(DownloadAssetsCommand::localAssetURL($localPath), DownloadAssetsCommand::availablePath($localPath, $cdnPath));
+        }
+    }
+
+    /** @return iterable<array{string, string}> */
+    private static function paths(): iterable
+    {
+        yield [DownloadAssetsCommand::REACT_PATH_LOCAL, DownloadAssetsCommand::REACT_PATH_CDN];
+        yield [DownloadAssetsCommand::REACT_DOM_PATH_LOCAL, DownloadAssetsCommand::REACT_DOM_PATH_CDN];
+        yield [DownloadAssetsCommand::JS_PATH_LOCAL, DownloadAssetsCommand::JS_PATH_CDN];
+        yield [DownloadAssetsCommand::PLUGIN_EXPLORER_PATH_LOCAL, DownloadAssetsCommand::PLUGIN_EXPLORER_PATH_CDN];
+        yield [DownloadAssetsCommand::CSS_PATH_LOCAL, DownloadAssetsCommand::CSS_PATH_CDN];
+        yield [DownloadAssetsCommand::FAVICON_PATH_LOCAL, DownloadAssetsCommand::FAVICON_PATH_CDN];
     }
 }

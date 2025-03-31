@@ -64,46 +64,39 @@ class DownloadAssetsCommand extends Command
 
     public static function reactPath(): string
     {
-        return self::assetPath(self::REACT_PATH_LOCAL, self::REACT_PATH_CDN);
+        return self::availablePath(self::REACT_PATH_LOCAL, self::REACT_PATH_CDN);
     }
 
     public static function reactDOMPath(): string
     {
-        return self::assetPath(self::REACT_DOM_PATH_LOCAL, self::REACT_DOM_PATH_CDN);
+        return self::availablePath(self::REACT_DOM_PATH_LOCAL, self::REACT_DOM_PATH_CDN);
     }
 
     public static function jsPath(): string
     {
-        return self::assetPath(self::JS_PATH_LOCAL, self::JS_PATH_CDN);
+        return self::availablePath(self::JS_PATH_LOCAL, self::JS_PATH_CDN);
     }
 
     public static function pluginExplorerPath(): string
     {
-        return self::assetPath(self::PLUGIN_EXPLORER_PATH_LOCAL, self::PLUGIN_EXPLORER_PATH_CDN);
+        return self::availablePath(self::PLUGIN_EXPLORER_PATH_LOCAL, self::PLUGIN_EXPLORER_PATH_CDN);
     }
 
     public static function cssPath(): string
     {
-        return self::assetPath(self::CSS_PATH_LOCAL, self::CSS_PATH_CDN);
+        return self::availablePath(self::CSS_PATH_LOCAL, self::CSS_PATH_CDN);
     }
 
     public static function faviconPath(): string
     {
-        return self::assetPath(self::FAVICON_PATH_LOCAL, self::FAVICON_PATH_CDN);
+        return self::availablePath(self::FAVICON_PATH_LOCAL, self::FAVICON_PATH_CDN);
     }
 
-    protected static function assetPath(string $local, string $cdn): string
+    public static function availablePath(string $local, string $cdn): string
     {
         return file_exists(self::publicPath($local))
-            ? self::asset($local)
-            : $cdn;
-    }
-
-    public static function asset(string $path): string
-    {
-        $url = Container::getInstance()->make(UrlGenerator::class);
-
-        return $url->asset($path);
+            ? self::localAssetURL($local)
+            : self::cdnURL($cdn);
     }
 
     public static function publicPath(string $path): string
@@ -112,5 +105,17 @@ class DownloadAssetsCommand extends Command
         assert($container instanceof LaravelApplication || $container instanceof LumenApplication);
 
         return $container->basePath("public/{$path}");
+    }
+
+    public static function localAssetURL(string $path): string
+    {
+        $url = Container::getInstance()->make(UrlGenerator::class);
+
+        return $url->asset($path);
+    }
+
+    public static function cdnURL(string $path): string
+    {
+        return str_replace('//', '/', $path);
     }
 }
