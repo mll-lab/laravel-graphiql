@@ -11,20 +11,20 @@ use Laravel\Lumen\Application as LumenApplication;
 class DownloadAssetsCommand extends Command
 {
     public const REACT_PATH_LOCAL = 'vendor/graphiql/react.production.min.js';
-    public const REACT_PATH_CDN = '//unpkg.com/react@17/umd/react.production.min.js';
+    public const REACT_PATH_CDN = '//cdn.jsdelivr.net/npm/react@17/umd/react.production.min.js';
 
     public const REACT_DOM_PATH_LOCAL = 'vendor/graphiql/react-dom.production.min.js';
-    public const REACT_DOM_PATH_CDN = '//unpkg.com/react-dom@17/umd/react-dom.production.min.js';
+    public const REACT_DOM_PATH_CDN = '//cdn.jsdelivr.net/npm/react-dom@17/umd/react-dom.production.min.js';
 
     public const JS_PATH_LOCAL = 'vendor/graphiql/graphiql.min.js';
-    public const JS_PATH_CDN = '//unpkg.com/graphiql/graphiql.min.js';
+    public const JS_PATH_CDN = '//cdn.jsdelivr.net/npm/graphiql/graphiql.min.js';
 
     public const PLUGIN_EXPLORER_PATH_LOCAL = 'vendor/graphiql/graphiql-plugin-explorer.umd.js';
     /** Pinned because the latest version broke, see https://github.com/mll-lab/laravel-graphiql/issues/25. */
-    public const PLUGIN_EXPLORER_PATH_CDN = '//unpkg.com/@graphiql/plugin-explorer@0.2.0/dist/index.umd.js';
+    public const PLUGIN_EXPLORER_PATH_CDN = '//cdn.jsdelivr.net/npm/@graphiql/plugin-explorer@0.2.0/dist/index.umd.js';
 
     public const CSS_PATH_LOCAL = 'vendor/graphiql/graphiql.min.css';
-    public const CSS_PATH_CDN = '//unpkg.com/graphiql/graphiql.min.css';
+    public const CSS_PATH_CDN = '//cdn.jsdelivr.net/npm/graphiql/graphiql.min.css';
 
     public const FAVICON_PATH_LOCAL = 'vendor/graphiql/favicon.ico';
     public const FAVICON_PATH_CDN = '//raw.githubusercontent.com/graphql/graphql.github.io/source/public/favicon.ico';
@@ -64,53 +64,58 @@ class DownloadAssetsCommand extends Command
 
     public static function reactPath(): string
     {
-        return self::assetPath(self::REACT_PATH_LOCAL, self::REACT_PATH_CDN);
+        return self::availablePath(self::REACT_PATH_LOCAL, self::REACT_PATH_CDN);
     }
 
     public static function reactDOMPath(): string
     {
-        return self::assetPath(self::REACT_DOM_PATH_LOCAL, self::REACT_DOM_PATH_CDN);
+        return self::availablePath(self::REACT_DOM_PATH_LOCAL, self::REACT_DOM_PATH_CDN);
     }
 
     public static function jsPath(): string
     {
-        return self::assetPath(self::JS_PATH_LOCAL, self::JS_PATH_CDN);
+        return self::availablePath(self::JS_PATH_LOCAL, self::JS_PATH_CDN);
     }
 
     public static function pluginExplorerPath(): string
     {
-        return self::assetPath(self::PLUGIN_EXPLORER_PATH_LOCAL, self::PLUGIN_EXPLORER_PATH_CDN);
+        return self::availablePath(self::PLUGIN_EXPLORER_PATH_LOCAL, self::PLUGIN_EXPLORER_PATH_CDN);
     }
 
     public static function cssPath(): string
     {
-        return self::assetPath(self::CSS_PATH_LOCAL, self::CSS_PATH_CDN);
+        return self::availablePath(self::CSS_PATH_LOCAL, self::CSS_PATH_CDN);
     }
 
     public static function faviconPath(): string
     {
-        return self::assetPath(self::FAVICON_PATH_LOCAL, self::FAVICON_PATH_CDN);
+        return self::availablePath(self::FAVICON_PATH_LOCAL, self::FAVICON_PATH_CDN);
     }
 
-    protected static function assetPath(string $local, string $cdn): string
+    public static function availablePath(string $local, string $cdn): string
     {
         return file_exists(self::publicPath($local))
-            ? self::asset($local)
-            : $cdn;
+            ? self::localAssetURL($local)
+            : self::cdnURL($cdn);
     }
 
-    protected static function asset(string $path): string
+    public static function publicPath(string $path): string
+    {
+        $container = Container::getInstance();
+        assert($container instanceof LaravelApplication || $container instanceof LumenApplication);
+
+        return $container->basePath("public/{$path}");
+    }
+
+    public static function localAssetURL(string $path): string
     {
         $url = Container::getInstance()->make(UrlGenerator::class);
 
         return $url->asset($path);
     }
 
-    protected static function publicPath(string $path): string
+    public static function cdnURL(string $path): string
     {
-        $container = Container::getInstance();
-        assert($container instanceof LaravelApplication || $container instanceof LumenApplication);
-
-        return $container->basePath("public/{$path}");
+        return str_replace('//', '/', $path);
     }
 }

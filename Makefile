@@ -1,5 +1,5 @@
 .PHONY: it
-it: fix stan ## Perform all quality checks
+it: fix stan test ## Perform all quality checks
 
 .PHONY: help
 help: ## Displays this list of targets with descriptions
@@ -14,8 +14,12 @@ fix: ## Fix the codestyle
 	vendor/bin/php-cs-fixer fix --allow-risky=yes
 
 .PHONY: stan
-stan: ## Run static analysis
+stan: ## Run static analysis with PHPStan
 	vendor/bin/phpstan analyse  --configuration=phpstan.neon
+
+.PHONY: test
+test: ## Run tests with PHPUnit
+	vendor/bin/phpunit
 
 vendor: composer.json ## Install dependencies through composer
 	composer update

@@ -67,3 +67,64 @@ jobs:
           ${{ matrix.composer.arg }}
 
       - run: vendor/bin/phpstan analyse  --configuration=phpstan.neon
+
+  tests:
+    name: PHPUnit on PHP ${{ matrix.php-version }} with Laravel ${{ matrix.laravel-version }} and ${{ matrix.composer.name }} dependencies
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - "8.0"
+          - "8.1"
+          - "8.2"
+          - "8.3"
+          - "8.4"
+        laravel-version:
+          - "^9"
+          - "^10"
+          - "^11"
+          - "^12"
+        composer:
+          - name: lowest
+            arg: "--prefer-lowest --prefer-stable"
+          - name: highest
+            arg: "" # No args added as highest is default
+        exclude:
+          - php-version: "8.0"
+            laravel-version: "^10"
+          - php-version: "8.0"
+            laravel-version: "^11"
+          - php-version: "8.0"
+            laravel-version: "^12"
+          - php-version: "8.1"
+            laravel-version: "^11"
+          - php-version: "8.1"
+            laravel-version: "^12"
+          - php-version: "8.3"
+            laravel-version: "^9"
+          - php-version: "8.4"
+            laravel-version: "^9"
+          - php-version: "8.4"
+            laravel-version: "^10"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          coverage: none
+          extensions: ${{ env.REQUIRED_PHP_EXTENSIONS }}
+          php-version: ${{ matrix.php-version }}
+
+      - run: >
+          composer require
+          illuminate/contracts:${{ matrix.laravel-version }}
+          --no-interaction
+          --prefer-dist
+          --no-progress
+          --update-with-all-dependencies
+          ${{ matrix.composer.arg }}
+
+      - run: vendor/bin/phpunit
