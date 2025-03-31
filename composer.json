@@ -22,16 +22,24 @@
   "require-dev": {
     "ergebnis/composer-normalize": "^2.45",
     "larastan/larastan": "^2.9.14 || ^3.1",
+    "laravel/framework": "^9 || ^10 || ^11 || ^12",
     "mll-lab/php-cs-fixer-config": "^5.10",
     "orchestra/testbench": "^7.52 || ^8.33 || ^9.11 || ^10",
     "phpstan/extension-installer": "^1.4.3",
-    "phpstan/phpstan": "^1.12.20 || ^2.1.7"
+    "phpstan/phpstan": "^1.12.20 || ^2.1.7",
+    "phpstan/phpstan-phpunit": "^1.4.2 || ^2.0.6",
+    "phpunit/phpunit": "^11.5.15 || ^12"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
   "autoload": {
     "psr-4": {
       "MLL\\GraphiQL\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MLL\\GraphiQL\\Tests\\": "tests/"
     }
   },
   "config": {

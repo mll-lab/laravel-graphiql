@@ -1,8 +1,9 @@
 # Generated
-vendor
-composer.lock
-.php-cs-fixer.cache
+/vendor
+/composer.lock
+/.php-cs-fixer.cache
+/.phpunit.result.cache
 
 # IDE
-.vscode/
-.idea/
+/.vscode
+/.idea

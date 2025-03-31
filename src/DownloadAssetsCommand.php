@@ -99,14 +99,14 @@ class DownloadAssetsCommand extends Command
             : $cdn;
     }
 
-    protected static function asset(string $path): string
+    public static function asset(string $path): string
     {
         $url = Container::getInstance()->make(UrlGenerator::class);
 
         return $url->asset($path);
     }
 
-    protected static function publicPath(string $path): string
+    public static function publicPath(string $path): string
     {
         $container = Container::getInstance();
         assert($container instanceof LaravelApplication || $container instanceof LumenApplication);
