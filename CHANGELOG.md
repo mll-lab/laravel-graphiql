@@ -9,6 +9,16 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+## v3.3.2
+
+### Fixed
+
+- Add `https:` to the CDN URLs
+
+### Deprecated
+
+- Deprecated asset methods in `DownloadAssetsCommand` in favor of `GraphiQLAsset` class
+
 ## v3.3.1
 
 ### Fixed

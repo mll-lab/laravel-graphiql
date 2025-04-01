@@ -3,49 +3,26 @@
 namespace MLL\GraphiQL;
 
 use Illuminate\Console\Command;
-use Illuminate\Container\Container;
-use Illuminate\Contracts\Routing\UrlGenerator;
-use Illuminate\Foundation\Application as LaravelApplication;
-use Laravel\Lumen\Application as LumenApplication;
 
 class DownloadAssetsCommand extends Command
 {
-    public const REACT_PATH_LOCAL = 'vendor/graphiql/react.production.min.js';
-    public const REACT_PATH_CDN = '//cdn.jsdelivr.net/npm/react@17/umd/react.production.min.js';
-
-    public const REACT_DOM_PATH_LOCAL = 'vendor/graphiql/react-dom.production.min.js';
-    public const REACT_DOM_PATH_CDN = '//cdn.jsdelivr.net/npm/react-dom@17/umd/react-dom.production.min.js';
-
-    public const JS_PATH_LOCAL = 'vendor/graphiql/graphiql.min.js';
-    public const JS_PATH_CDN = '//cdn.jsdelivr.net/npm/graphiql/graphiql.min.js';
-
-    public const PLUGIN_EXPLORER_PATH_LOCAL = 'vendor/graphiql/graphiql-plugin-explorer.umd.js';
-    /** Pinned because the latest version broke, see https://github.com/mll-lab/laravel-graphiql/issues/25. */
-    public const PLUGIN_EXPLORER_PATH_CDN = '//cdn.jsdelivr.net/npm/@graphiql/plugin-explorer@0.2.0/dist/index.umd.js';
-
-    public const CSS_PATH_LOCAL = 'vendor/graphiql/graphiql.min.css';
-    public const CSS_PATH_CDN = '//cdn.jsdelivr.net/npm/graphiql/graphiql.min.css';
-
-    public const FAVICON_PATH_LOCAL = 'vendor/graphiql/favicon.ico';
-    public const FAVICON_PATH_CDN = '//raw.githubusercontent.com/graphql/graphql.github.io/source/public/favicon.ico';
-
     protected $signature = 'graphiql:download-assets';
 
     protected $description = 'Download the newest version of the GraphiQL assets to serve them locally.';
 
     public function handle(): void
     {
-        $this->downloadFileFromCDN(self::REACT_PATH_LOCAL, self::REACT_PATH_CDN);
-        $this->downloadFileFromCDN(self::REACT_DOM_PATH_LOCAL, self::REACT_DOM_PATH_CDN);
-        $this->downloadFileFromCDN(self::CSS_PATH_LOCAL, self::CSS_PATH_CDN);
-        $this->downloadFileFromCDN(self::JS_PATH_LOCAL, self::JS_PATH_CDN);
-        $this->downloadFileFromCDN(self::PLUGIN_EXPLORER_PATH_LOCAL, self::PLUGIN_EXPLORER_PATH_CDN);
-        $this->downloadFileFromCDN(self::FAVICON_PATH_LOCAL, self::FAVICON_PATH_CDN);
+        $this->downloadFileFromCDN(GraphiQLAsset::REACT_JS_LOCAL_PATH, GraphiQLAsset::REACT_JS_SOURCE_URL);
+        $this->downloadFileFromCDN(GraphiQLAsset::REACT_DOM_JS_LOCAL_PATH, GraphiQLAsset::REACT_DOM_JS_SOURCE_URL);
+        $this->downloadFileFromCDN(GraphiQLAsset::GRAPHIQL_CSS_LOCAL_PATH, GraphiQLAsset::GRAPHIQL_CSS_SOURCE_URL);
+        $this->downloadFileFromCDN(GraphiQLAsset::GRAPHIQL_JS_LOCAL_PATH, GraphiQLAsset::GRAPHIQL_JS_SOURCE_URL);
+        $this->downloadFileFromCDN(GraphiQLAsset::PLUGIN_EXPLORER_JS_LOCAL_PATH, GraphiQLAsset::PLUGIN_EXPLORER_JS_SOURCE_URL);
+        $this->downloadFileFromCDN(GraphiQLAsset::FAVICON_LOCAL_PATH, GraphiQLAsset::FAVICON_SOURCE_URL);
     }
 
     protected function downloadFileFromCDN(string $localPath, string $cdnPath): void
     {
-        $publicPath = self::publicPath($localPath);
+        $publicPath = GraphiQLAsset::publicPath($localPath);
 
         // Ensure the directory exists
         $directory = dirname($publicPath);
@@ -53,7 +30,7 @@ class DownloadAssetsCommand extends Command
             mkdir($directory, 0777, true);
         }
 
-        $contents = file_get_contents("https:{$cdnPath}");
+        $contents = file_get_contents($cdnPath);
         if ($contents === false) {
             $error = error_get_last();
             throw new \ErrorException($error['message'] ?? 'An error occurred', 0, $error['type'] ?? 1);
@@ -62,60 +39,39 @@ class DownloadAssetsCommand extends Command
         file_put_contents($publicPath, $contents);
     }
 
+    /** @deprecated use GraphiQLAsset::reactJS, this alias will be removed in the next major version */
     public static function reactPath(): string
     {
-        return self::availablePath(self::REACT_PATH_LOCAL, self::REACT_PATH_CDN);
+        return GraphiQLAsset::reactJS();
     }
 
+    /** @deprecated use GraphiQLAsset::reactDOMJS, this alias will be removed in the next major version */
     public static function reactDOMPath(): string
     {
-        return self::availablePath(self::REACT_DOM_PATH_LOCAL, self::REACT_DOM_PATH_CDN);
+        return GraphiQLAsset::reactDOMJS();
     }
 
+    /** @deprecated use GraphiQLAsset::graphiQLJS, this alias will be removed in the next major version */
     public static function jsPath(): string
     {
-        return self::availablePath(self::JS_PATH_LOCAL, self::JS_PATH_CDN);
+        return GraphiQLAsset::graphiQLJS();
     }
 
+    /** @deprecated use GraphiQLAsset::pluginExplorerJS, this alias will be removed in the next major version */
     public static function pluginExplorerPath(): string
     {
-        return self::availablePath(self::PLUGIN_EXPLORER_PATH_LOCAL, self::PLUGIN_EXPLORER_PATH_CDN);
+        return GraphiQLAsset::pluginExplorerJS();
     }
 
+    /** @deprecated use GraphiQLAsset::graphiQLCSS, this alias will be removed in the next major version */
     public static function cssPath(): string
     {
-        return self::availablePath(self::CSS_PATH_LOCAL, self::CSS_PATH_CDN);
+        return GraphiQLAsset::graphiQLCSS();
     }
 
+    /** @deprecated use GraphiQLAsset::favicon, this alias will be removed in the next major version */
     public static function faviconPath(): string
     {
-        return self::availablePath(self::FAVICON_PATH_LOCAL, self::FAVICON_PATH_CDN);
-    }
-
-    public static function availablePath(string $local, string $cdn): string
-    {
-        return file_exists(self::publicPath($local))
-            ? self::localAssetURL($local)
-            : self::cdnURL($cdn);
-    }
-
-    public static function publicPath(string $path): string
-    {
-        $container = Container::getInstance();
-        assert($container instanceof LaravelApplication || $container instanceof LumenApplication);
-
-        return $container->basePath("public/{$path}");
-    }
-
-    public static function localAssetURL(string $path): string
-    {
-        $url = Container::getInstance()->make(UrlGenerator::class);
-
-        return $url->asset($path);
-    }
-
-    public static function cdnURL(string $path): string
-    {
-        return str_replace('//', '/', $path);
+        return GraphiQLAsset::favicon();
     }
 }

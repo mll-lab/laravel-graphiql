@@ -2,6 +2,12 @@
 
 This document provides guidance for upgrading between major versions.
 
+## v3 to v4
+
+### View
+
+The URLs for the GraphiQL assets are now provided by class `MLL\GraphiQL\GraphiQLAsset` instead of `MLL\GraphiQL\DownloadAssetsCommand`.
+
 ## v1 to v2
 
 ### Multiple routes

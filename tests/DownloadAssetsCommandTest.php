@@ -2,7 +2,7 @@
 
 namespace MLL\GraphiQL\Tests;
 
-use MLL\GraphiQL\DownloadAssetsCommand;
+use MLL\GraphiQL\GraphiQLAsset;
 
 final class DownloadAssetsCommandTest extends TestCase
 {
@@ -11,7 +11,7 @@ final class DownloadAssetsCommandTest extends TestCase
         parent::setUp();
 
         foreach (self::paths() as [$localPath, $cdnPath]) {
-            $publicPath = DownloadAssetsCommand::publicPath($localPath);
+            $publicPath = GraphiQLAsset::publicPath($localPath);
             if (file_exists($publicPath)) {
                 unlink($publicPath);
             }
@@ -21,27 +21,27 @@ final class DownloadAssetsCommandTest extends TestCase
     public function testSuccessfulDownload(): void
     {
         foreach (self::paths() as [$localPath, $cdnPath]) {
-            $this->assertFileDoesNotExist(DownloadAssetsCommand::publicPath($localPath));
-            $this->assertSame(DownloadAssetsCommand::cdnURL($cdnPath), DownloadAssetsCommand::availablePath($localPath, $cdnPath));
+            $this->assertFileDoesNotExist(GraphiQLAsset::publicPath($localPath));
+            $this->assertSame($cdnPath, GraphiQLAsset::availableURL($localPath, $cdnPath));
         }
 
         $this->artisan('graphiql:download-assets')
             ->assertOk();
 
         foreach (self::paths() as [$localPath, $cdnPath]) {
-            $this->assertFileExists(DownloadAssetsCommand::publicPath($localPath));
-            $this->assertSame(DownloadAssetsCommand::localAssetURL($localPath), DownloadAssetsCommand::availablePath($localPath, $cdnPath));
+            $this->assertFileExists(GraphiQLAsset::publicPath($localPath));
+            $this->assertSame(GraphiQLAsset::localURL($localPath), GraphiQLAsset::availableURL($localPath, $cdnPath));
         }
     }
 
     /** @return iterable<array{string, string}> */
     private static function paths(): iterable
     {
-        yield [DownloadAssetsCommand::REACT_PATH_LOCAL, DownloadAssetsCommand::REACT_PATH_CDN];
-        yield [DownloadAssetsCommand::REACT_DOM_PATH_LOCAL, DownloadAssetsCommand::REACT_DOM_PATH_CDN];
-        yield [DownloadAssetsCommand::JS_PATH_LOCAL, DownloadAssetsCommand::JS_PATH_CDN];
-        yield [DownloadAssetsCommand::PLUGIN_EXPLORER_PATH_LOCAL, DownloadAssetsCommand::PLUGIN_EXPLORER_PATH_CDN];
-        yield [DownloadAssetsCommand::CSS_PATH_LOCAL, DownloadAssetsCommand::CSS_PATH_CDN];
-        yield [DownloadAssetsCommand::FAVICON_PATH_LOCAL, DownloadAssetsCommand::FAVICON_PATH_CDN];
+        yield [GraphiQLAsset::REACT_JS_LOCAL_PATH, GraphiQLAsset::REACT_JS_SOURCE_URL];
+        yield [GraphiQLAsset::REACT_DOM_JS_LOCAL_PATH, GraphiQLAsset::REACT_DOM_JS_SOURCE_URL];
+        yield [GraphiQLAsset::GRAPHIQL_CSS_LOCAL_PATH, GraphiQLAsset::GRAPHIQL_CSS_SOURCE_URL];
+        yield [GraphiQLAsset::FAVICON_LOCAL_PATH, GraphiQLAsset::FAVICON_SOURCE_URL];
+        yield [GraphiQLAsset::GRAPHIQL_JS_LOCAL_PATH, GraphiQLAsset::GRAPHIQL_JS_SOURCE_URL];
+        yield [GraphiQLAsset::PLUGIN_EXPLORER_JS_LOCAL_PATH, GraphiQLAsset::PLUGIN_EXPLORER_JS_SOURCE_URL];
     }
 }
