@@ -33,9 +33,9 @@ If you have published the view, update it according to this diff:
 +    <link rel="stylesheet" href="{{ GraphiQLAsset::graphiQLCSS() }}"/>
 +    <link rel="shortcut icon" href="{{ GraphiQLAsset::favicon() }}"/>
  </head>
- 
+
  <body>
- 
+
  <div id="graphiql">Loading...</div>
 -<script src="{{ DownloadAssetsCommand::jsPath() }}"></script>
 -<script src="{{ DownloadAssetsCommand::pluginExplorerPath() }}"></script>
