@@ -25,7 +25,7 @@ class GraphiQLAsset
     public const FAVICON_SOURCE_URL = 'https://raw.githubusercontent.com/graphql/graphql.github.io/source/public/favicon.ico';
 
     public const GRAPHIQL_JS_LOCAL_PATH = 'vendor/graphiql/graphiql.js';
-    public const GRAPHIQL_JS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/graphiql@4/dist/';
+    public const GRAPHIQL_JS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/graphiql@4/dist/index.umd.js';
 
     public const PLUGIN_EXPLORER_JS_LOCAL_PATH = 'vendor/graphiql/graphiql-plugin-explorer.js';
     public const PLUGIN_EXPLORER_JS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/@graphiql/plugin-explorer@4/dist/index.umd.js';
