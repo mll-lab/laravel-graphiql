@@ -17,7 +17,7 @@ use MLL\GraphiQL\GraphiQLAsset;
             height: 100dvh;
         }
 
-        .loading {
+        #graphiql-loading {
             height: 100%;
             display: flex;
             align-items: center;
@@ -35,30 +35,19 @@ use MLL\GraphiQL\GraphiQLAsset;
 <body>
 
 <div id="graphiql">
-    <div class="loading">Loading…</div>
+    <div id="graphiql-loading">Loading…</div>
 </div>
 
 <script src="{{ GraphiQLAsset::graphiQLJS() }}"></script>
 <script src="{{ GraphiQLAsset::pluginExplorerJS() }}"></script>
 <script>
-    const fetcher = GraphiQL.createFetcher({
-        url: '{{ $url }}',
-        subscriptionUrl: '{{ $subscriptionUrl }}',
-    });
+    const explorer = GraphiQLPluginExplorer.explorerPlugin();
 
     function GraphiQLWithExplorer() {
-        const [query, setQuery] = React.useState('');
-
         return React.createElement(GraphiQL, {
             fetcher,
-            query,
-            onEditQuery: setQuery,
-            defaultEditorToolsVisibility: true,
             plugins: [
-                GraphiQLPluginExplorer.useExplorerPlugin({
-                    query,
-                    onEdit: setQuery,
-                }),
+                explorer,
             ],
             // See https://github.com/graphql/graphiql/tree/main/packages/graphiql#props for available settings
         });
