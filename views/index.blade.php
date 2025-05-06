@@ -4,58 +4,40 @@
 use MLL\GraphiQL\GraphiQLAsset;
 @endphp
 <head>
-    <meta charset=utf-8/>
-    <meta name="viewport"
-          content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GraphiQL</title>
     <style>
         body {
-            height: 100%;
             margin: 0;
-            width: 100%;
-            overflow: hidden;
+            overflow: hidden; /* in Firefox */
         }
 
         #graphiql {
-            height: 100vh;
+            height: 100dvh;
         }
 
-        /* Make the explorer feel more integrated */
-        .docExplorerWrap {
-            overflow: auto !important;
-            width: 100% !important;
-            height: auto !important;
-        }
-
-        .doc-explorer-title-bar {
-            font-weight: var(--font-weight-medium);
-            font-size: var(--font-size-h2);
-            overflow-x: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .doc-explorer-rhs {
-            display: none;
-        }
-
-        .doc-explorer-contents {
-            margin: var(--px-16) 0 0;
-        }
-
-        .graphiql-explorer-actions select {
-            margin-left: var(--px-12);
+        .loading {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
         }
     </style>
     <script src="{{ GraphiQLAsset::reactJS() }}"></script>
     <script src="{{ GraphiQLAsset::reactDOMJS() }}"></script>
     <link rel="stylesheet" href="{{ GraphiQLAsset::graphiQLCSS() }}"/>
+    <link rel="stylesheet" href="{{ GraphiQLAsset::pluginExplorerCSS() }}"/>
     <link rel="shortcut icon" href="{{ GraphiQLAsset::favicon() }}"/>
 </head>
 
 <body>
 
-<div id="graphiql">Loading...</div>
+<div id="graphiql">
+    <div class="loading">Loading…</div>
+</div>
+
 <script src="{{ GraphiQLAsset::graphiQLJS() }}"></script>
 <script src="{{ GraphiQLAsset::pluginExplorerJS() }}"></script>
 <script>

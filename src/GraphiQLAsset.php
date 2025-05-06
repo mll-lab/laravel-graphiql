@@ -15,18 +15,20 @@ class GraphiQLAsset
     public const REACT_DOM_JS_LOCAL_PATH = 'vendor/graphiql/react-dom.production.min.js';
     public const REACT_DOM_JS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js';
 
-    public const GRAPHIQL_CSS_LOCAL_PATH = 'vendor/graphiql/graphiql.min.css';
-    public const GRAPHIQL_CSS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/graphiql/graphiql.min.css';
+    public const GRAPHIQL_CSS_LOCAL_PATH = 'vendor/graphiql/graphiql.css';
+    public const GRAPHIQL_CSS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/graphiql@4/dist/style.css';
+
+    public const PLUGIN_EXPLORER_CSS_LOCAL_PATH = 'vendor/graphiql/graphiql-plugin-explorer.css';
+    public const PLUGIN_EXPLORER_CSS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/@graphiql/plugin-explorer@4/dist/style.css';
 
     public const FAVICON_LOCAL_PATH = 'vendor/graphiql/favicon.ico';
     public const FAVICON_SOURCE_URL = 'https://raw.githubusercontent.com/graphql/graphql.github.io/source/public/favicon.ico';
 
-    public const GRAPHIQL_JS_LOCAL_PATH = 'vendor/graphiql/graphiql.min.js';
-    public const GRAPHIQL_JS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/graphiql/graphiql.min.js';
+    public const GRAPHIQL_JS_LOCAL_PATH = 'vendor/graphiql/graphiql.js';
+    public const GRAPHIQL_JS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/graphiql@4/dist/';
 
-    public const PLUGIN_EXPLORER_JS_LOCAL_PATH = 'vendor/graphiql/graphiql-plugin-explorer.umd.js';
-    /** Pinned because the latest version broke, see https://github.com/mll-lab/laravel-graphiql/issues/25. */
-    public const PLUGIN_EXPLORER_JS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/@graphiql/plugin-explorer@0.2.0/dist/index.umd.js';
+    public const PLUGIN_EXPLORER_JS_LOCAL_PATH = 'vendor/graphiql/graphiql-plugin-explorer.js';
+    public const PLUGIN_EXPLORER_JS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/@graphiql/plugin-explorer@4/dist/index.umd.js';
 
     public static function reactJS(): string
     {
@@ -41,6 +43,11 @@ class GraphiQLAsset
     public static function graphiQLCSS(): string
     {
         return self::availableURL(self::GRAPHIQL_CSS_LOCAL_PATH, self::GRAPHIQL_CSS_SOURCE_URL);
+    }
+
+    public static function pluginExplorerCSS(): string
+    {
+        return self::availableURL(self::PLUGIN_EXPLORER_CSS_LOCAL_PATH, self::PLUGIN_EXPLORER_CSS_SOURCE_URL);
     }
 
     public static function favicon(): string
@@ -73,10 +80,10 @@ class GraphiQLAsset
         return $url->asset($path);
     }
 
-    public static function availableURL(string $local, string $cdn): string
+    public static function availableURL(string $local, string $sourceURL): string
     {
         return file_exists(self::publicPath($local))
             ? self::localURL($local)
-            : $cdn;
+            : $sourceURL;
     }
 }
