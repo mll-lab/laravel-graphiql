@@ -10,10 +10,10 @@ use Laravel\Lumen\Application as LumenApplication;
 class GraphiQLAsset
 {
     public const REACT_JS_LOCAL_PATH = 'vendor/graphiql/react.production.min.js';
-    public const REACT_JS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/react@17/umd/react.production.min.js';
+    public const REACT_JS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js';
 
     public const REACT_DOM_JS_LOCAL_PATH = 'vendor/graphiql/react-dom.production.min.js';
-    public const REACT_DOM_JS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/react-dom@17/umd/react-dom.production.min.js';
+    public const REACT_DOM_JS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js';
 
     public const GRAPHIQL_CSS_LOCAL_PATH = 'vendor/graphiql/graphiql.min.css';
     public const GRAPHIQL_CSS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/graphiql/graphiql.min.css';
