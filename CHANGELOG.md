@@ -9,6 +9,12 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+## v3.3.3
+
+### Fixed
+
+- Upgrade to React 18, fixes `TypeError: e.useInsertionEffect is not a function`
+
 ## v3.3.2
 
 ### Fixed
