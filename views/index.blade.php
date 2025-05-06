@@ -1,3 +1,4 @@
+{{-- See https://github.com/graphql/graphiql/blob/main/examples/graphiql-cdn/index.html. --}}
 <!DOCTYPE html>
 <html lang="en">
 @php
