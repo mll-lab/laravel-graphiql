@@ -10,6 +10,7 @@ If you have published and/or customized the view, you need to republish or updat
 See [views/index.blade.php](views/index.blade.php) for the latest version.
 
 Major changes:
+
 - The URLs for the GraphiQL assets are now provided by class `MLL\GraphiQL\GraphiQLAsset` instead of `MLL\GraphiQL\DownloadAssetsCommand`.
 - The setup now uses GraphiQL version 4.
 
