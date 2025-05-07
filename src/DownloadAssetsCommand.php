@@ -39,40 +39,4 @@ class DownloadAssetsCommand extends Command
 
         file_put_contents($publicPath, $contents);
     }
-
-    /** @deprecated use GraphiQLAsset::reactJS, this alias will be removed in the next major version */
-    public static function reactPath(): string
-    {
-        return GraphiQLAsset::reactJS();
-    }
-
-    /** @deprecated use GraphiQLAsset::reactDOMJS, this alias will be removed in the next major version */
-    public static function reactDOMPath(): string
-    {
-        return GraphiQLAsset::reactDOMJS();
-    }
-
-    /** @deprecated use GraphiQLAsset::graphiQLJS, this alias will be removed in the next major version */
-    public static function jsPath(): string
-    {
-        return GraphiQLAsset::graphiQLJS();
-    }
-
-    /** @deprecated use GraphiQLAsset::pluginExplorerJS, this alias will be removed in the next major version */
-    public static function pluginExplorerPath(): string
-    {
-        return GraphiQLAsset::pluginExplorerJS();
-    }
-
-    /** @deprecated use GraphiQLAsset::graphiQLCSS, this alias will be removed in the next major version */
-    public static function cssPath(): string
-    {
-        return GraphiQLAsset::graphiQLCSS();
-    }
-
-    /** @deprecated use GraphiQLAsset::favicon, this alias will be removed in the next major version */
-    public static function faviconPath(): string
-    {
-        return GraphiQLAsset::favicon();
-    }
 }
