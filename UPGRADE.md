@@ -6,45 +6,13 @@ This document provides guidance for upgrading between major versions.
 
 ### View
 
-The URLs for the GraphiQL assets are now provided by class `MLL\GraphiQL\GraphiQLAsset` instead of `MLL\GraphiQL\DownloadAssetsCommand`.
-If you have published the view, update it according to this diff:
+If you have published and/or customized the view, you need to republish or update it.
+See [views/index.blade.php](views/index.blade.php) for the latest version.
 
-```diff
-@@ -1,6 +1,8 @@
- <!DOCTYPE html>
- <html lang="en">
--@php use MLL\GraphiQL\DownloadAssetsCommand; @endphp
-+@php
-+use MLL\GraphiQL\GraphiQLAsset;
-+@endphp
- <head>
-     <meta charset=utf-8/>
-     <meta name="viewport"
-@@ -45,17 +47,17 @@
-             margin-left: var(--px-12);
-         }
-     </style>
--    <script src="{{ DownloadAssetsCommand::reactPath() }}"></script>
--    <script src="{{ DownloadAssetsCommand::reactDOMPath() }}"></script>
--    <link rel="stylesheet" href="{{ DownloadAssetsCommand::cssPath() }}"/>
--    <link rel="shortcut icon" href="{{ DownloadAssetsCommand::faviconPath() }}"/>
-+    <script src="{{ GraphiQLAsset::reactJS() }}"></script>
-+    <script src="{{ GraphiQLAsset::reactDOMJS() }}"></script>
-+    <link rel="stylesheet" href="{{ GraphiQLAsset::graphiQLCSS() }}"/>
-+    <link rel="shortcut icon" href="{{ GraphiQLAsset::favicon() }}"/>
- </head>
+Major changes:
 
- <body>
-
- <div id="graphiql">Loading...</div>
--<script src="{{ DownloadAssetsCommand::jsPath() }}"></script>
--<script src="{{ DownloadAssetsCommand::pluginExplorerPath() }}"></script>
-+<script src="{{ GraphiQLAsset::graphiQLJS() }}"></script>
-+<script src="{{ GraphiQLAsset::pluginExplorerJS() }}"></script>
- <script>
-     const fetcher = GraphiQL.createFetcher({
-         url: '{{ $url }}',
-```
+- The URLs for the GraphiQL assets are now provided by class `MLL\GraphiQL\GraphiQLAsset` instead of `MLL\GraphiQL\DownloadAssetsCommand`.
+- The setup now uses GraphiQL version 4.
 
 ## v1 to v2
 
