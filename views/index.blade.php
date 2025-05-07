@@ -42,6 +42,10 @@ use MLL\GraphiQL\GraphiQLAsset;
 <script src="{{ GraphiQLAsset::graphiQLJS() }}"></script>
 <script src="{{ GraphiQLAsset::pluginExplorerJS() }}"></script>
 <script>
+    const fetcher = GraphiQL.createFetcher({
+        url: '{{ $url }}',
+        subscriptionUrl: '{{ $subscriptionUrl }}',
+    });
     const explorer = GraphiQLPluginExplorer.explorerPlugin();
 
     function GraphiQLWithExplorer() {

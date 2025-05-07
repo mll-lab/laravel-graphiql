@@ -9,6 +9,12 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+## v4.0.1
+
+### Fixed
+
+- Fix `Uncaught ReferenceError: fetcher is not defined` error
+
 ## v4.0.0
 
 ### Changed
