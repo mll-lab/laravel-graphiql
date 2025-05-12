@@ -25,6 +25,11 @@ use MLL\GraphiQL\GraphiQLAsset;
             justify-content: center;
             font-size: 4rem;
         }
+
+        .docExplorerWrap {
+            /* Allow scrolling, see https://github.com/graphql/graphiql/issues/3098. */
+            overflow: auto !important;
+        }
     </style>
     <script src="{{ GraphiQLAsset::reactJS() }}"></script>
     <script src="{{ GraphiQLAsset::reactDOMJS() }}"></script>

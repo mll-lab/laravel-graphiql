@@ -9,6 +9,12 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+## v4.0.2
+
+### Fixed
+
+- Allow scrolling in GraphiQL Explorer plugin
+
 ## v4.0.1
 
 ### Fixed
