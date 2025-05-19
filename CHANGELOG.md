@@ -28,6 +28,12 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 - Upgrade to GraphiQL 4
 - Remove deprecated aliases for methods in `GraphiQLAsset` from `DownloadAssetsCommand`
 
+## v3.3.4
+
+### Fixed
+
+- Pin GraphiQL assets to version 3
+
 ## v3.3.3
 
 ### Fixed
