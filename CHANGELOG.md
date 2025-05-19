@@ -9,6 +9,12 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+## v3.3.4
+
+### Fixed
+
+- Pin GraphiQL assets to version 3
+
 ## v3.3.3
 
 ### Fixed
