@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace MLL\GraphiQL;
 
@@ -16,13 +18,13 @@ class GraphiQLAsset
     public const REACT_DOM_JS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js';
 
     public const GRAPHIQL_CSS_LOCAL_PATH = 'vendor/graphiql/graphiql.min.css';
-    public const GRAPHIQL_CSS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/graphiql/graphiql.min.css';
+    public const GRAPHIQL_CSS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/graphiql@3/graphiql.min.css';
 
     public const FAVICON_LOCAL_PATH = 'vendor/graphiql/favicon.ico';
     public const FAVICON_SOURCE_URL = 'https://raw.githubusercontent.com/graphql/graphql.github.io/source/public/favicon.ico';
 
     public const GRAPHIQL_JS_LOCAL_PATH = 'vendor/graphiql/graphiql.min.js';
-    public const GRAPHIQL_JS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/graphiql/graphiql.min.js';
+    public const GRAPHIQL_JS_SOURCE_URL = 'https://cdn.jsdelivr.net/npm/graphiql@3/graphiql.min.js';
 
     public const PLUGIN_EXPLORER_JS_LOCAL_PATH = 'vendor/graphiql/graphiql-plugin-explorer.umd.js';
     /** Pinned because the latest version broke, see https://github.com/mll-lab/laravel-graphiql/issues/25. */
