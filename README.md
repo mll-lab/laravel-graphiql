@@ -8,17 +8,19 @@ A thin wrapper for serving [the GraphiQL UI](https://github.com/graphql/graphiql
 
 ![Screenshot of GraphiQL with Doc Explorer Open](https://raw.githubusercontent.com/graphql/graphiql/main/packages/graphiql/resources/graphiql.png)
 
-> **Please note**: This a UI for testing and exploring your schema and does not include a GraphQL server implementation.
+> **Please note**: This is a UI for testing and exploring your schema and does not include a GraphQL server implementation.
 > To serve a GraphQL API from Laravel, we recommend [nuwave/lighthouse](https://github.com/nuwave/lighthouse).
 
 ## Installation
 
 Install the package via [composer](https://getcomposer.org):
 
-    composer require mll-lab/laravel-graphiql
+```shell
+composer require mll-lab/laravel-graphiql
+```
 
 Due to [Laravel package discovery](https://laravel.com/docs/packages#package-discovery),
-this package will automatically register and is ready to use without configuration.
+this package will automatically register and is then ready to use without configuration.
 
 If you are using Lumen, register the service provider in `bootstrap/app.php`
 
@@ -32,19 +34,19 @@ When upgrading between major versions, consider [`UPGRADE.md`](UPGRADE.md).
 
 ## Configuration
 
-By default, the GraphiQL UI is reachable at `/graphiql`
-and assumes a running GraphQL endpoint at `/graphql`.
+By default, the GraphiQL UI is reachable at `/graphiql` and assumes a running GraphQL endpoint at `/graphql`.
+To change those defaults, publish the configuration with the following command:
 
-To change the defaults, publish the configuration with the following command:
-
-    php artisan vendor:publish --tag=graphiql-config
+```shell
+php artisan vendor:publish --tag=graphiql-config
+```
 
 You will find the configuration file at `config/graphiql.php`.
 
 ### Lumen
 
-If you are using Lumen, copy it into that location manually and load the configuration
-in your `boostrap/app.php`:
+If you are using Lumen, copy [src/graphiql.php](src/graphiql.php) to `config/graphiql.php` manually.
+Then load the configuration in your `boostrap/app.php`:
 
 ```php
 $app->configure('graphiql');
@@ -52,16 +54,17 @@ $app->configure('graphiql');
 
 ### HTTPS behind proxy
 
-If your application sits behind a proxy which resolves https, the generated URL for the endpoint
-might not use `https://`, thus causing the GraphiQL UI to not work by default. In order to solve
-this, configure your `TrustProxies` middleware to contain `\Symfony\Component\HttpFoundation\Request::HEADER_X_FORWARDED_FOR`
-in `$headers`.
+If your application sits behind a proxy which resolves https, the generated URL for the endpoint might not use `https://`.
+This may cause the GraphiQL UI to not work by default.
+To solve this, configure your `TrustProxies` middleware to contain `\Symfony\Component\HttpFoundation\Request::HEADER_X_FORWARDED_FOR` in `$headers`.
 
 ## Customization
 
 To customize the GraphiQL UI even further, publish the view:
 
-    php artisan vendor:publish --tag=graphiql-view
+```shell
+php artisan vendor:publish --tag=graphiql-view
+```
 
 You can use that for all kinds of customization.
 
@@ -78,11 +81,11 @@ React.createElement(GraphiQL, {
 
 ### Configure session authentication
 
-Session based authentication can be used with [Laravel Sanctum](https://laravel.com/docs/sanctum).
+Session-based authentication can be used with [Laravel Sanctum](https://laravel.com/docs/sanctum).
 If you use GraphQL through sessions and CSRF, add the following to the `<head>` in the published view:
 
-```php
-<meta name="csrf-token" content="{{ csrf_token() }}">
+```diff
++<meta name="csrf-token" content="{{ csrf_token() }}">
 ```
 
 Modify the GraphiQL props as follows:
@@ -111,10 +114,12 @@ Make sure your route includes the `web` middleware group in `config/graphiql.php
 
 To serve the assets from your own server, download them with:
 
-    php artisan graphiql:download-assets
+```shell
+php artisan graphiql:download-assets
+```
 
-This puts the necessary CSS, JS and Favicon into your `public` directory. If you have
-the assets downloaded, they will be used instead of the online version from the CDN.
+This puts the necessary CSS, JS and Favicon into your `public` directory.
+If you have the assets downloaded, they will be used instead of the online version from the CDN.
 
 ## Security
 
