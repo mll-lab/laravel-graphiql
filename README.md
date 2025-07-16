@@ -91,12 +91,13 @@ If you use GraphQL through sessions and CSRF, add the following to the `<head>` 
 Modify the GraphiQL props as follows:
 
 ```diff
-React.createElement(GraphiQL, {
-    ...,
-+   defaultHeaders: JSON.stringify({
+const fetcher = GraphiQL.createFetcher({
+    url: '{{ $url }}',
+    subscriptionUrl: '{{ $subscriptionUrl }}',
++   headers: {
 +       'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-+   }),
-})
++   },
+});
 ```
 
 Make sure your route includes the `web` middleware group in `config/graphiql.php`:
