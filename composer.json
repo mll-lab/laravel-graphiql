@@ -15,16 +15,16 @@
   ],
   "require": {
     "php": "^8",
-    "illuminate/console": "^9 || ^10 || ^11 || ^12",
-    "illuminate/contracts": "^9 || ^10 || ^11 || ^12",
-    "illuminate/support": "^9 || ^10 || ^11 || ^12"
+    "illuminate/console": "^9 || ^10 || ^11 || ^12 || ^13",
+    "illuminate/contracts": "^9 || ^10 || ^11 || ^12 || ^13",
+    "illuminate/support": "^9 || ^10 || ^11 || ^12 || ^13"
   },
   "require-dev": {
     "ergebnis/composer-normalize": "^2.45",
     "larastan/larastan": "^2.9.14 || ^3.1",
-    "laravel/framework": "^9 || ^10 || ^11 || ^12",
+    "laravel/framework": "^9 || ^10 || ^11 || ^12 || ^13",
     "mll-lab/php-cs-fixer-config": "^5.10",
-    "orchestra/testbench": "^7.52 || ^8.33 || ^9.11 || ^10",
+    "orchestra/testbench": "^7.52 || ^8.33 || ^9.11 || ^10 || ^11",
     "phpstan/extension-installer": "^1.4.3",
     "phpstan/phpstan": "^1.12.20 || ^2.1.7",
     "phpstan/phpstan-phpunit": "^1.4.2 || ^2.0.6",
