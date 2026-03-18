@@ -9,6 +9,12 @@ See [GitHub releases](https://github.com/mll-lab/laravel-graphiql/releases).
 
 ## Unreleased
 
+## v4.1.0
+
+### Added
+
+- Support Laravel 13 https://github.com/mll-lab/laravel-graphiql/pull/66
+
 ## v4.0.2
 
 ### Fixed
