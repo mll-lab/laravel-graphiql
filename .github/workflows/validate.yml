@@ -74,6 +74,9 @@ jobs:
           --update-with-all-dependencies
           ${{ matrix.composer.arg }}
 
+      - if: matrix.laravel-version != '^9' && matrix.laravel-version != '^10' && matrix.composer.name == 'highest'
+        run: composer require --dev tomasvotruba/bladestan --no-interaction --prefer-dist --no-progress --update-with-all-dependencies
+
       - run: vendor/bin/phpstan analyse  --configuration=phpstan.neon
 
   tests:
