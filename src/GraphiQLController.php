@@ -23,7 +23,7 @@ class GraphiQLController
             ?? throw new NotFoundHttpException("No graphiql route config found for '{$path}'.");
         assert(is_array($routeConfig));
 
-        return $this->viewFactory->make('graphiql::index', [ // @phpstan-ignore argument.type (larastan cannot resolve namespaced package views)
+        return $this->viewFactory->make('graphiql::index', [
             'url' => $this->maybeURL($routeConfig['endpoint'] ?? null), // @phpstan-ignore argument.type (mixed)
             'subscriptionUrl' => $this->maybeURL($routeConfig['subscription-endpoint'] ?? null), // @phpstan-ignore argument.type (mixed)
         ]);
