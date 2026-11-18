@@ -31,11 +31,16 @@ class DownloadAssetsCommand extends Command
             mkdir($directory, 0777, true);
         }
 
-        $contents = file_get_contents($sourceURL);
-        if ($contents === false) {
-            $error = error_get_last();
-            throw new \ErrorException($error['message'] ?? 'An error occurred', 0, $error['type'] ?? 1);
-        }
+        $context = stream_context_create(['http' => ['timeout' => 30]]);
+        $contents = retry([1000, 2000, 4000], static function () use ($sourceURL, $context): string {
+            $contents = @file_get_contents($sourceURL, false, $context);
+            if ($contents === false) {
+                $error = error_get_last();
+                throw new \ErrorException($error['message'] ?? "Failed to download {$sourceURL}", 0, $error['type'] ?? 1);
+            }
+
+            return $contents;
+        });
 
         file_put_contents($publicPath, $contents);
     }
