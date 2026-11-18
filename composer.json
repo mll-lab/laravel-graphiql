@@ -48,6 +48,11 @@
       "kylekatarnls/update-helper": true,
       "phpstan/extension-installer": true
     },
+    "policy": {
+      "advisories": {
+        "block": false
+      }
+    },
     "sort-packages": true
   },
   "extra": {
