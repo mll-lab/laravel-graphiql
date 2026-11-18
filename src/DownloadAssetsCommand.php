@@ -33,13 +33,22 @@ class DownloadAssetsCommand extends Command
 
         $context = stream_context_create(['http' => ['timeout' => 30]]);
         $contents = retry([1000, 2000, 4000], static function () use ($sourceURL, $context): string {
-            $contents = @file_get_contents($sourceURL, false, $context);
-            if ($contents === false) {
+            $stream = @fopen($sourceURL, 'r', false, $context);
+            if ($stream === false) {
                 $error = error_get_last();
-                throw new \ErrorException($error['message'] ?? "Failed to download {$sourceURL}", 0, $error['type'] ?? 1);
+                throw new \ErrorException($error['message'] ?? "Failed to download: {$sourceURL}.", 0, $error['type'] ?? 1);
             }
 
-            return $contents;
+            try {
+                $contents = stream_get_contents($stream);
+                if ($contents === false || stream_get_meta_data($stream)['timed_out']) {
+                    throw new \RuntimeException("Timed out downloading: {$sourceURL}.");
+                }
+
+                return $contents;
+            } finally {
+                fclose($stream);
+            }
         });
 
         file_put_contents($publicPath, $contents);
