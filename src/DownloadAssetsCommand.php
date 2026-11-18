@@ -31,25 +31,40 @@ class DownloadAssetsCommand extends Command
             mkdir($directory, 0777, true);
         }
 
-        $context = stream_context_create(['http' => ['timeout' => 30]]);
-        $contents = retry([1000, 2000, 4000], static function () use ($sourceURL, $context): string {
-            $stream = @fopen($sourceURL, 'r', false, $context);
-            if ($stream === false) {
-                $error = error_get_last();
-                throw new \ErrorException($error['message'] ?? "Failed to download: {$sourceURL}.", 0, $error['type'] ?? 1);
-            }
-
-            try {
-                $contents = stream_get_contents($stream);
-                if ($contents === false || stream_get_meta_data($stream)['timed_out']) {
-                    throw new \RuntimeException("Timed out downloading: {$sourceURL}.");
+        $context = stream_context_create([
+            'http' => [
+                'timeout' => 30,
+            ],
+        ]);
+        $contents = retry(
+            [1000, 2000, 4000],
+            static function () use ($sourceURL, $context): string {
+                $stream = @fopen(
+                    $sourceURL,
+                    'r',
+                    false,
+                    $context,
+                );
+                if ($stream === false) {
+                    $error = error_get_last();
+                    $message = $error['message'] ?? "Failed to download: {$sourceURL}.";
+                    $severity = $error['type'] ?? 1;
+                    throw new \ErrorException($message, 0, $severity);
                 }
 
-                return $contents;
-            } finally {
-                fclose($stream);
-            }
-        });
+                try {
+                    $contents = stream_get_contents($stream);
+                    $timedOut = stream_get_meta_data($stream)['timed_out'];
+                    if ($contents === false || $timedOut) {
+                        throw new \RuntimeException("Timed out downloading: {$sourceURL}.");
+                    }
+
+                    return $contents;
+                } finally {
+                    fclose($stream);
+                }
+            },
+        );
 
         file_put_contents($publicPath, $contents);
     }
