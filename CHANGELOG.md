@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.2.0](https://github.com/mll-lab/laravel-graphiql/compare/v4.1.0...v4.2.0) (2026-11-18)
+
+### Features
+
+* retry failed asset downloads with backoff and timeout ([#73](https://github.com/mll-lab/laravel-graphiql/issues/73)) ([82af651](https://github.com/mll-lab/laravel-graphiql/commit/82af651b21a4e07f6aca5b7c509c669570768f1a))
+
 ## v4.1.0
 
 ### Added
